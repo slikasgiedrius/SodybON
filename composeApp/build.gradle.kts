@@ -35,21 +35,21 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
 
-            implementation(platform("com.google.firebase:firebase-bom:30.0.1"))
+            implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
         }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material)
+            implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
-            implementation("dev.gitlive:firebase-firestore:1.8.1") // This line
-            implementation("dev.gitlive:firebase-common:1.8.1")// This line
-            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+            implementation("dev.gitlive:firebase-firestore:1.13.0") // This line
+            implementation("dev.gitlive:firebase-common:1.13.0")// This line
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
         }
     }
 }
