@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "311568248602",
+    "project_id": "sodybon",
+    "storage_bucket": "sodybon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311568248602:android:7784227caf5f4b25e846a3",
+        "android_client_info": {
+          "package_name": "com.giedrius.slikas.sodybon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCj17DMl0i1OqqATamWQ09TTn1negfkHGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
