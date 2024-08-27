@@ -1,18 +1,22 @@
-package com.giedrius.slikas.sodybon
+package com.giedrius.slikas.sodybon.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.giedrius.slikas.sodybon.data.user.model.User
+import org.koin.compose.koinInject
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = viewModel { HomeViewModel() },
+    viewModel: HomeViewModel = koinInject(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    Users(uiState.users)
+    Column {
+        Users(uiState.users)
+        Text(uiState.articles.toString())
+    }
 }
 
 @Composable

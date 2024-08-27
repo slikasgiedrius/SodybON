@@ -1,4 +1,4 @@
-package com.giedrius.slikas.sodybon
+package com.giedrius.slikas.sodybon.data.user.model
 
 import kotlinx.serialization.Serializable
 

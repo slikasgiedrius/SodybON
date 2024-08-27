@@ -1,17 +1,8 @@
 package com.giedrius.slikas.sodybon
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.DatePicker
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
+import com.giedrius.slikas.sodybon.ui.HomeScreen
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.firestore.firestore
 
@@ -19,18 +10,5 @@ import dev.gitlive.firebase.firestore.firestore
 fun App() {
     MaterialTheme {
         HomeScreen()
-    }
-}
-
-suspend fun getUsers(): List<User> {
-    val firebaseFirestore = Firebase.firestore
-    try {
-        val userResponse =
-            firebaseFirestore.collection("USERS").get()
-        return userResponse.documents.map {
-            it.data()
-        }
-    } catch (e: Exception) {
-        throw e
     }
 }
