@@ -30,13 +30,6 @@ kotlin {
     }
     
     sourceSets {
-        
-        androidMain.dependencies {
-            implementation(compose.preview)
-            implementation(libs.androidx.activity.compose)
-
-            implementation(project.dependencies.platform(libs.firebase.bom))
-        }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -47,12 +40,25 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
+            //ViewModel
+            implementation(libs.lifecycle.viewmodel.compose)
+
+            //Firebase
             implementation(libs.firebase.firestore)
             implementation(libs.firebase.common)
             implementation(libs.kotlinx.serialization.json)
 
-            //ViewModel
-            implementation(libs.lifecycle.viewmodel.compose)
+            //Koin
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+        }
+
+        androidMain.dependencies {
+            implementation(compose.preview)
+            implementation(libs.androidx.activity.compose)
+
+            //Firebase
+            implementation(project.dependencies.platform(libs.firebase.bom))
         }
     }
 }

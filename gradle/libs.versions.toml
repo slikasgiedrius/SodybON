@@ -15,6 +15,8 @@ compose-plugin = "1.6.11"
 firebaseCommonKtx = "21.0.0"
 firebaseFirestore = "1.13.0"
 junit = "4.13.2"
+koinCompose = "1.1.5"
+koinCore = "3.5.6"
 kotlin = "2.0.0"
 googleServices = "4.4.2"
 firebase-bom = "33.2.0"
@@ -25,6 +27,8 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 firebase-common = { module = "dev.gitlive:firebase-common", version.ref = "firebaseFirestore" }
 firebase-common-ktx = { module = "com.google.firebase:firebase-common-ktx", version.ref = "firebaseCommonKtx" }
 firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "firebaseFirestore" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCompose" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
