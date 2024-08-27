@@ -35,7 +35,7 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
 
-            implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+            implementation(project.dependencies.platform(libs.firebase.bom))
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -47,12 +47,12 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
-            implementation("dev.gitlive:firebase-firestore:1.13.0") // This line
-            implementation("dev.gitlive:firebase-common:1.13.0")// This line
-            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+            implementation(libs.firebase.firestore)
+            implementation(libs.firebase.common)
+            implementation(libs.kotlinx.serialization.json)
 
             //ViewModel
-            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
+            implementation(libs.lifecycle.viewmodel.compose)
         }
     }
 }
@@ -92,7 +92,7 @@ android {
     dependencies {
         debugImplementation(compose.uiTooling)
 
-        implementation("com.google.firebase:firebase-common-ktx:20.3.3")
+        implementation(libs.firebase.common.ktx)
     }
 }
 
