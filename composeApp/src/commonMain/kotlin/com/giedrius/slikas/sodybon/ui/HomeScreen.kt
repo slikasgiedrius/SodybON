@@ -26,6 +26,24 @@ fun HomeScreen(
     Column {
         Text(getPlatform().name)
         LazyColumn {
+            items(uiState.articles) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.primary
+                    )
+                ) {
+                    Text(
+                        text = it.author ?: "No author",
+                        modifier = Modifier.padding(16.dp),
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+            }
+        }
+        LazyColumn {
             items(uiState.users) {
                 Card(
                     modifier = Modifier

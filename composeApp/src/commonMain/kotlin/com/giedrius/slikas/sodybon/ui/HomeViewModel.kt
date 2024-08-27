@@ -28,8 +28,9 @@ class HomeViewModel(
 
     init {
         viewModelScope.launch {
+            //Launch only one otherwise it crashes ios
             updateUsers()
-            updateArticles()
+//            updateArticles()
         }
     }
 

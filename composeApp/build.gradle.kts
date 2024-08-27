@@ -40,9 +40,6 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
-            //ViewModel
-            implementation(libs.lifecycle.viewmodel.compose)
-
             //Firebase
             implementation(libs.firebase.firestore)
             implementation(libs.firebase.common)
@@ -53,9 +50,9 @@ kotlin {
             implementation(libs.koin.compose)
 
             //Ktor
-            implementation("io.ktor:ktor-client-core:2.3.10")
-            implementation("io.ktor:ktor-client-content-negotiation:2.3.10")
-            implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.10")
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
         }
 
         androidMain.dependencies {
@@ -66,11 +63,11 @@ kotlin {
             implementation(project.dependencies.platform(libs.firebase.bom))
 
             //Ktor
-            implementation("io.ktor:ktor-client-android:2.3.10")
+            implementation(libs.ktor.client.android)
         }
 
         iosMain.dependencies {
-            implementation("io.ktor:ktor-client-darwin:2.3.10")
+            implementation(libs.ktor.client.darwin)
         }
     }
 }
