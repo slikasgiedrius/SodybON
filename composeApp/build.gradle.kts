@@ -50,6 +50,9 @@ kotlin {
             implementation("dev.gitlive:firebase-firestore:1.13.0") // This line
             implementation("dev.gitlive:firebase-common:1.13.0")// This line
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+
+            //ViewModel
+            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
         }
     }
 }

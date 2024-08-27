@@ -18,13 +18,7 @@ import dev.gitlive.firebase.firestore.firestore
 @Composable
 fun App() {
     MaterialTheme {
-        Column(Modifier.fillMaxWidth()) {
-            var list by remember { mutableStateOf(listOf<User>()) }
-            LaunchedEffect(Unit) {
-                list = getUsers()
-            }
-            Text(list.toString())
-        }
+        HomeScreen()
     }
 }
 
@@ -38,17 +32,5 @@ suspend fun getUsers(): List<User> {
         }
     } catch (e: Exception) {
         throw e
-    }
-}
-
-@Composable
-fun UserItem(user: User) {
-    Column {
-        Text(
-            text = user.name
-        )
-        Text(
-            text = user.age.toString()
-        )
     }
 }
