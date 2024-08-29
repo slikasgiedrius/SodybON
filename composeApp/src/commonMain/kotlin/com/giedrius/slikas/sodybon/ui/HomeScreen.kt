@@ -1,11 +1,13 @@
 package com.giedrius.slikas.sodybon.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -21,7 +23,9 @@ fun HomeScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    Column {
+    Column(
+        modifier = Modifier.background(MaterialTheme.colors.primary)
+    ) {
         Text(getPlatform().name)
         LazyColumn {
             items(uiState.articles) {
@@ -32,7 +36,10 @@ fun HomeScreen(
                 ) {
                     Text(
                         text = it.author ?: "No author",
-                        modifier = Modifier.padding(16.dp),
+                        modifier = Modifier
+                            .background(MaterialTheme.colors.primaryVariant)
+                            .padding(16.dp),
+                        color = MaterialTheme.colors.onPrimary
                     )
                 }
             }
