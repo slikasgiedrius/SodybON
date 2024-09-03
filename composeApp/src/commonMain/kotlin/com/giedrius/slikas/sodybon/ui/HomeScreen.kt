@@ -2,12 +2,17 @@ package com.giedrius.slikas.sodybon.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
@@ -18,6 +23,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -29,6 +35,7 @@ import com.giedrius.slikas.sodybon.getPlatform
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
 import sodybon.composeapp.generated.resources.Res
 import sodybon.composeapp.generated.resources.compose_multiplatform
@@ -102,38 +109,64 @@ fun UserList(
 fun PropertiesList(
     properties: List<Property>,
 ) {
-    LazyColumn(content = {
-        items(properties) {
-            Card(backgroundColor = Color.LightGray,
-                modifier = Modifier.padding(all = 4.dp).fillMaxWidth().height(300.dp),
-                onClick = {
-                    //Handle on click
-                }) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
+    LazyColumn(
+        modifier = Modifier.background(MaterialTheme.colors.primary),
+        content = {
+            items(properties) {
+                Card(
+                    backgroundColor = Color.LightGray,
+                    modifier = Modifier.padding(all = 16.dp).fillMaxWidth().height(300.dp),
+                    onClick = {
+                        //Handle on click
+                    }
                 ) {
-                    Text(it.name)
-                    if (it.logoUrl.isNullOrEmpty()) {
-                        Image(
-                            painter = painterResource(Res.drawable.compose_multiplatform),
-                            null,
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.background(MaterialTheme.colors.primary),
+                    ) {
+                        Text(
+                            color = MaterialTheme.colors.onPrimary,
+                            text = it.name,
+                            fontWeight = FontWeight.Bold
                         )
-                    } else {
-                        KamelImage(resource = asyncPainterResource(it.logoUrl),
-                            contentDescription = "",
-                            contentScale = ContentScale.FillWidth,
-                            onLoading = { CircularProgressIndicator(it) },
-                            onFailure = {
-                                Column {
-                                    Text(
-                                        text = "Failed to load",
-                                        fontWeight = FontWeight.Bold,
-                                    )
-                                }
-                            })
+                        if (it.imageUrl.isNullOrEmpty()) {
+                            Image(
+                                painter = painterResource(Res.drawable.compose_multiplatform),
+                                null,
+                            )
+                        } else {
+                            KamelImage(
+                                resource = asyncPainterResource(it.imageUrl),
+                                contentDescription = "",
+                                contentScale = ContentScale.FillWidth,
+                                onLoading = { CircularProgressIndicator(it) },
+                                onFailure = {
+                                    Column {
+                                        Text(
+                                            text = "Failed to load",
+                                            fontWeight = FontWeight.Bold,
+                                        )
+                                    }
+                                })
+                        }
                     }
                 }
             }
-        }
-    })
+        })
+}
+
+@Preview
+@Composable
+private fun PreviewPropertiesList() {
+    MaterialTheme {
+        PropertiesList(
+            properties = listOf(
+                Property(
+                    name = "Property 1",
+                    imageUrl = null,
+                    address = "Address 1",
+                ),
+            )
+        )
+    }
 }

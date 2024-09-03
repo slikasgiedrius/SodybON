@@ -70,6 +70,7 @@ kotlin {
         }
 
         iosMain.dependencies {
+            //Ktor
             implementation(libs.ktor.client.darwin)
         }
     }

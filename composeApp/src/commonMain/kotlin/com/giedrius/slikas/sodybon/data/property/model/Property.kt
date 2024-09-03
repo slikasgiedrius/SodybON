@@ -5,5 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Property(
     val name: String,
-    val logoUrl: String
+    val imageUrl: String?,
+    val address: String,
 )
