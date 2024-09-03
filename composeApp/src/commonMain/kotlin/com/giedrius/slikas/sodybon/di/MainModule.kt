@@ -8,18 +8,6 @@ import com.giedrius.slikas.sodybon.ui.HomeViewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
-fun initializeKoin() {
-    startKoin {
-        modules(
-            listOf(
-                mainModule(),
-                firebaseModule(),
-                networkModule(),
-            )
-        )
-    }
-}
-
 fun mainModule() = module {
     factory<ArticleRepository> { (ArticleRepositoryImpl(get())) }
     factory<UserRepository> { (UserRepositoryImpl(get())) }
