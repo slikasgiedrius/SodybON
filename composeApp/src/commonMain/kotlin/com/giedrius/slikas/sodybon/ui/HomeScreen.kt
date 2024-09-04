@@ -18,6 +18,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -26,6 +29,8 @@ import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.data.property.model.Property
 import com.giedrius.slikas.sodybon.data.property.model.getShortAddress
+import dev.materii.pullrefresh.PullRefreshLayout
+import dev.materii.pullrefresh.rememberPullRefreshState
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.jetbrains.compose.resources.painterResource
@@ -39,13 +44,22 @@ fun HomeScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
+    var isRefreshing by remember {
+        mutableStateOf(false)
+    }
+    var pullRefreshState = rememberPullRefreshState(refreshing = isRefreshing, onRefresh = { viewModel.updateProperties() })
+
     SodybOnTheme {
-        PropertiesList(
-            modifier = Modifier
-                .background(MaterialTheme.colors.background)
-                .windowInsetsPadding(WindowInsets.safeDrawing),
-            properties = uiState.properties,
-        )
+        PullRefreshLayout(
+            state = pullRefreshState
+        ) {
+            PropertiesList(
+                modifier = Modifier
+                    .background(MaterialTheme.colors.background)
+                    .windowInsetsPadding(WindowInsets.safeDrawing),
+                properties = uiState.properties,
+            )
+        }
     }
 }
 

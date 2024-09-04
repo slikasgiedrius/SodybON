@@ -40,7 +40,7 @@ class HomeViewModel(
         }
     }
 
-    private fun updateProperties() {
+    fun updateProperties() {
         viewModelScope.launch {
             _uiState.update {
                 it.copy(properties = propertyRepository.getProperties())

@@ -14,7 +14,7 @@ kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_22)
         }
     }
     
@@ -54,11 +54,14 @@ kotlin {
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
 
-            //Kamel Image Loader
+            //Kamel image loader
             implementation(libs.kamel.image)
 
             //Kermit logging
             implementation(libs.kermit)
+
+            //Pull refresh
+            implementation("dev.materii.pullrefresh:pullrefresh:1.4.0-beta03")
         }
 
         androidMain.dependencies {
@@ -105,8 +108,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_22
+        targetCompatibility = JavaVersion.VERSION_22
     }
     buildFeatures {
         compose = true
