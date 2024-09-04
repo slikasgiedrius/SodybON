@@ -56,6 +56,9 @@ kotlin {
 
             //Kamel Image Loader
             implementation(libs.kamel.image)
+
+            //Kermit logging
+            implementation("co.touchlab:kermit:2.0.4")
         }
 
         androidMain.dependencies {

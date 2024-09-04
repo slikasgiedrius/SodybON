@@ -2,14 +2,9 @@ package com.giedrius.slikas.sodybon.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,10 +19,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.data.article.model.Article
 import com.giedrius.slikas.sodybon.data.property.model.Property
 import com.giedrius.slikas.sodybon.data.user.model.User
@@ -48,7 +43,9 @@ fun HomeScreen(
 
 //    ArticleList(uiState.articles)
 //    UserList(uiState.users)
-    PropertiesList(uiState.properties)
+    PropertiesList(
+        properties = uiState.properties,
+    )
 }
 
 @Composable
@@ -110,22 +107,17 @@ fun PropertiesList(
     properties: List<Property>,
 ) {
     LazyColumn(
-        modifier = Modifier.background(MaterialTheme.colors.primary),
         content = {
             items(properties) {
                 Card(
-                    backgroundColor = Color.LightGray,
-                    modifier = Modifier.padding(all = 16.dp).fillMaxWidth().height(300.dp),
                     onClick = {
-                        //Handle on click
+                        Logger.i { "List item clicked" }
                     }
                 ) {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.background(MaterialTheme.colors.primary),
                     ) {
                         Text(
-                            color = MaterialTheme.colors.onPrimary,
                             text = it.name,
                             fontWeight = FontWeight.Bold
                         )
@@ -136,9 +128,11 @@ fun PropertiesList(
                             )
                         } else {
                             KamelImage(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(16.dp)),
                                 resource = asyncPainterResource(it.imageUrl),
                                 contentDescription = "",
-                                contentScale = ContentScale.FillWidth,
+                                contentScale = ContentScale.Fit,
                                 onLoading = { CircularProgressIndicator(it) },
                                 onFailure = {
                                     Column {
@@ -166,7 +160,7 @@ private fun PreviewPropertiesList() {
                     imageUrl = null,
                     address = "Address 1",
                 ),
-            )
+            ),
         )
     }
 }
