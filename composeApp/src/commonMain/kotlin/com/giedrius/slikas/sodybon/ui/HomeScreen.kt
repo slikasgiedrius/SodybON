@@ -91,10 +91,16 @@ fun PropertiesList(
                     }
                 }
                 Text(
-                    modifier = Modifier.padding(bottom = 16.dp),
+                    modifier = Modifier.padding(bottom = 8.dp),
                     text = it.name,
                     style = MaterialTheme.typography.h6,
                     fontWeight = FontWeight.SemiBold,
+                )
+                Text(
+                    modifier = Modifier.padding(bottom = 24.dp),
+                    text = it.address,
+                    style = MaterialTheme.typography.subtitle1,
+                    fontWeight = FontWeight.Normal,
                 )
             }
         })
