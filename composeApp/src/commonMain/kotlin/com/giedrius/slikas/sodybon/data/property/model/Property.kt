@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 data class Property(
     val name: String,
     val imageUrl: String?,
-    val address: String,
+    val address: Address,
+    val isEnabled: Boolean,
 )

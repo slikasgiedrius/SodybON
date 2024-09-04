@@ -25,10 +25,10 @@ import androidx.compose.ui.unit.dp
 import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.data.property.model.Property
+import com.giedrius.slikas.sodybon.data.property.model.getShortAddress
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
 import sodybon.composeapp.generated.resources.Res
 import sodybon.composeapp.generated.resources.compose_multiplatform
@@ -60,7 +60,7 @@ fun PropertiesList(
             .fillMaxSize()
             .padding(16.dp),
         content = {
-            items(properties) {
+            items(properties.filter { it.isEnabled }) {
                 Card(
                     modifier = Modifier.padding(bottom = 16.dp),
                     onClick = {
@@ -98,26 +98,10 @@ fun PropertiesList(
                 )
                 Text(
                     modifier = Modifier.padding(bottom = 24.dp),
-                    text = it.address,
+                    text = it.address.getShortAddress(),
                     style = MaterialTheme.typography.subtitle1,
                     fontWeight = FontWeight.Normal,
                 )
             }
         })
-}
-
-@Preview
-@Composable
-private fun PreviewPropertiesList() {
-    MaterialTheme {
-        PropertiesList(
-            properties = listOf(
-                Property(
-                    name = "Property 1",
-                    imageUrl = null,
-                    address = "Address 1",
-                ),
-            ),
-        )
-    }
 }
