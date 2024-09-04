@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -20,16 +19,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
-import com.giedrius.slikas.sodybon.data.article.model.Article
 import com.giedrius.slikas.sodybon.data.property.model.Property
-import com.giedrius.slikas.sodybon.data.user.model.User
-import com.giedrius.slikas.sodybon.getPlatform
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.jetbrains.compose.resources.painterResource
@@ -98,7 +93,7 @@ fun PropertiesList(
                 Text(
                     modifier = Modifier.padding(bottom = 16.dp),
                     text = it.name,
-                    style = MaterialTheme.typography.body1,
+                    style = MaterialTheme.typography.h6,
                     fontWeight = FontWeight.SemiBold,
                 )
             }

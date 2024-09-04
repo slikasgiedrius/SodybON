@@ -6,8 +6,6 @@ import com.giedrius.slikas.sodybon.data.article.ArticleRepository
 import com.giedrius.slikas.sodybon.data.article.model.Article
 import com.giedrius.slikas.sodybon.data.property.PropertyRepository
 import com.giedrius.slikas.sodybon.data.property.model.Property
-import com.giedrius.slikas.sodybon.data.user.UserRepository
-import com.giedrius.slikas.sodybon.data.user.model.User
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,14 +14,12 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
 data class HomeScreenUiState(
-    var users: List<User> = emptyList(),
     var articles: List<Article> = emptyList(),
     val properties: List<Property> = emptyList(),
 )
 
 class HomeViewModel(
     private val articleRepository: ArticleRepository,
-    private val usersRepository: UserRepository,
     private val propertyRepository: PropertyRepository,
 ) : ViewModel(), KoinComponent {
 
@@ -40,14 +36,6 @@ class HomeViewModel(
         viewModelScope.launch {
             _uiState.update {
                 it.copy(articles = articleRepository.getArticles().articles)
-            }
-        }
-    }
-
-    private fun updateUsers() {
-        viewModelScope.launch {
-            _uiState.update {
-                it.copy(users = usersRepository.getUsers())
             }
         }
     }

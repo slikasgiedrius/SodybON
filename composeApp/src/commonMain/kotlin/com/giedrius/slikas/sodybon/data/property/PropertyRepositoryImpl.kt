@@ -1,8 +1,6 @@
 package com.giedrius.slikas.sodybon.data.property
 
 import com.giedrius.slikas.sodybon.data.property.model.Property
-import com.giedrius.slikas.sodybon.data.user.UserRepository
-import com.giedrius.slikas.sodybon.data.user.model.User
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.firestore.firestore
 
