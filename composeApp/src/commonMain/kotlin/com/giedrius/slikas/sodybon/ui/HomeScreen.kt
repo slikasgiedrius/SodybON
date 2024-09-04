@@ -23,6 +23,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import co.touchlab.kermit.Logger
+import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.data.article.model.Article
 import com.giedrius.slikas.sodybon.data.property.model.Property
 import com.giedrius.slikas.sodybon.data.user.model.User
@@ -43,9 +44,11 @@ fun HomeScreen(
 
 //    ArticleList(uiState.articles)
 //    UserList(uiState.users)
-    PropertiesList(
-        properties = uiState.properties,
-    )
+    SodybOnTheme {
+        PropertiesList(
+            properties = uiState.properties,
+        )
+    }
 }
 
 @Composable
@@ -114,9 +117,7 @@ fun PropertiesList(
                         Logger.i { "List item clicked" }
                     }
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
+                    Column {
                         Text(
                             text = it.name,
                             fontWeight = FontWeight.Bold

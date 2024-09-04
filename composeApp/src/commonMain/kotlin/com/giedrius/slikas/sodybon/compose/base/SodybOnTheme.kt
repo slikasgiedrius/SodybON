@@ -32,7 +32,7 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun TobTheme(
+fun SodybOnTheme(
     content: @Composable () -> Unit,
 ) {
     val colors = if (isSystemInDarkTheme()) {
@@ -43,12 +43,8 @@ fun TobTheme(
 
     MaterialTheme(
         colors = colors,
-        shapes = MaterialTheme.shapes.copy(
-            small = RoundedCornerShape(8.dp),
-            medium = RoundedCornerShape(8.dp),
-            large = RoundedCornerShape(8.dp),
-        )
-    ) {
-        content()
-    }
+        shapes = shapes,
+        typography = typography,
+        content = content,
+    )
 }
