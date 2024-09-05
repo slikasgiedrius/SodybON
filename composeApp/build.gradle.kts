@@ -56,7 +56,7 @@ kotlin {
             implementation(libs.kermit)
 
             //Pull refresh
-            implementation("dev.materii.pullrefresh:pullrefresh:1.4.0-beta03")
+            implementation(libs.pullrefresh)
         }
 
         androidMain.dependencies {
