@@ -2,6 +2,7 @@ package com.giedrius.slikas.sodybon.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
@@ -22,6 +24,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -45,10 +48,13 @@ fun HomeScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    var isRefreshing by remember {
+    val isRefreshing by remember {
         mutableStateOf(false)
     }
-    var pullRefreshState = rememberPullRefreshState(refreshing = isRefreshing, onRefresh = { viewModel.updateProperties() })
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = isRefreshing,
+        onRefresh = { viewModel.updateProperties() }
+    )
 
     SodybOnTheme {
         PullRefreshLayout(
@@ -83,7 +89,10 @@ fun PropertiesList(
         content = {
             items(properties.filter { it.isEnabled }) {
                 Card(
-                    modifier = Modifier.padding(bottom = 16.dp),
+                    backgroundColor = MaterialTheme.colors.background,
+                    shape = MaterialTheme.shapes.medium,
+                    elevation = 0.dp,
+                    modifier = Modifier.padding(bottom = 20.dp),
                     onClick = {
                         Logger.i { "List item clicked: ${it.name}" }
                     }
@@ -96,6 +105,7 @@ fun PropertiesList(
                             )
                         } else {
                             KamelImage(
+                                modifier = Modifier.clip(MaterialTheme.shapes.medium),
                                 resource = asyncPainterResource(it.imageUrl),
                                 contentDescription = "",
                                 contentScale = ContentScale.Fit,
@@ -109,20 +119,24 @@ fun PropertiesList(
                                     }
                                 })
                         }
+
+                        Text(
+                            modifier = Modifier.padding(top = 8.dp),
+                            text = it.name,
+                            style = MaterialTheme.typography.h6,
+                            fontWeight = FontWeight.SemiBold,
+                        )
+                        Text(
+                            modifier = Modifier.padding(
+                                top = 4.dp,
+                                bottom = 4.dp,
+                            ),
+                            text = it.address.getShortAddress(),
+                            style = MaterialTheme.typography.subtitle1,
+                            fontWeight = FontWeight.Normal,
+                        )
                     }
                 }
-                Text(
-                    modifier = Modifier.padding(bottom = 8.dp),
-                    text = it.name,
-                    style = MaterialTheme.typography.h6,
-                    fontWeight = FontWeight.SemiBold,
-                )
-                Text(
-                    modifier = Modifier.padding(bottom = 24.dp),
-                    text = it.address.getShortAddress(),
-                    style = MaterialTheme.typography.subtitle1,
-                    fontWeight = FontWeight.Normal,
-                )
             }
         })
 }

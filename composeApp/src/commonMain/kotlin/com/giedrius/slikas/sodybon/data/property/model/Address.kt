@@ -13,5 +13,5 @@ data class Address(
 )
 
 fun Address.getShortAddress(): String {
-    return "${this.city}, ${this.country}"
+    return "${this.city}, ${this.municipality}"
 }
