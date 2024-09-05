@@ -29,6 +29,7 @@ import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.data.property.model.Property
 import com.giedrius.slikas.sodybon.data.property.model.getShortAddress
+import dev.materii.pullrefresh.PullRefreshIndicator
 import dev.materii.pullrefresh.PullRefreshLayout
 import dev.materii.pullrefresh.rememberPullRefreshState
 import io.kamel.image.KamelImage
@@ -51,7 +52,13 @@ fun HomeScreen(
 
     SodybOnTheme {
         PullRefreshLayout(
-            state = pullRefreshState
+            state = pullRefreshState,
+            indicator = {
+                PullRefreshIndicator(
+                    state = pullRefreshState,
+                    contentColor = MaterialTheme.colors.primary
+                )
+            }
         ) {
             PropertiesList(
                 modifier = Modifier
