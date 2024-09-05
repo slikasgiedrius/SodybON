@@ -8,9 +8,8 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) {
         appDeclaration()
         modules(
             listOf(
-                mainModule(),
                 firebaseModule(),
-                networkModule(),
+                mainModule(),
             )
         )
     }
