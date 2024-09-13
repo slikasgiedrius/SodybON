@@ -8,8 +8,8 @@ data class Address(
     val country: String,
     val houseNumber: String,
     val municipality: String,
+    val street: String?,
     val zipCode: String,
-    val street: String,
 )
 
 fun Address.getShortAddress(): String {

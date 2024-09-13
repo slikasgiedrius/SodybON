@@ -6,8 +6,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -30,14 +32,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
+import com.giedrius.slikas.sodybon.data.property.model.Address
 import com.giedrius.slikas.sodybon.data.property.model.Property
 import com.giedrius.slikas.sodybon.data.property.model.getShortAddress
+import com.giedrius.slikas.sodybon.utils.getMockedPropertyList
 import dev.materii.pullrefresh.PullRefreshIndicator
 import dev.materii.pullrefresh.PullRefreshLayout
 import dev.materii.pullrefresh.rememberPullRefreshState
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
 import sodybon.composeapp.generated.resources.Res
 import sodybon.composeapp.generated.resources.compose_multiplatform
@@ -89,10 +94,10 @@ fun PropertiesList(
         content = {
             items(properties.filter { it.isEnabled }) {
                 Card(
+                    modifier = Modifier.padding(bottom = 20.dp),
                     backgroundColor = MaterialTheme.colors.background,
                     shape = MaterialTheme.shapes.medium,
                     elevation = 0.dp,
-                    modifier = Modifier.padding(bottom = 20.dp),
                     onClick = {
                         Logger.i { "List item clicked: ${it.name}" }
                     }
@@ -105,7 +110,9 @@ fun PropertiesList(
                             )
                         } else {
                             KamelImage(
-                                modifier = Modifier.clip(MaterialTheme.shapes.medium),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clip(MaterialTheme.shapes.medium),
                                 resource = asyncPainterResource(it.imageUrl),
                                 contentDescription = "",
                                 contentScale = ContentScale.Fit,
@@ -139,4 +146,14 @@ fun PropertiesList(
                 }
             }
         })
+}
+
+@Preview
+@Composable
+private fun PreviewPropertiesList() {
+    SodybOnTheme {
+        PropertiesList(
+            properties = getMockedPropertyList()
+        )
+    }
 }
