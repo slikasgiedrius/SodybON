@@ -4,7 +4,7 @@ import com.giedrius.slikas.sodybon.data.property.model.Address
 import com.giedrius.slikas.sodybon.data.property.model.Property
 
 fun getMockedPropertyList(): List<Property> {
-    return mockedProperties().shuffled()
+    return mockedProperties()
 }
 
 private fun mockedProperties(): List<Property> = listOf(
