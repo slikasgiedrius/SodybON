@@ -9,6 +9,7 @@ fun getMockedPropertyList(): List<Property> {
 
 private fun mockedProperties(): List<Property> = listOf(
     Property(
+        id = "sod1-prusiskiu-dvaras",
         name = "Prūsiškių dvaras",
         imageUrl = null,
         address = Address(
@@ -22,6 +23,7 @@ private fun mockedProperties(): List<Property> = listOf(
         isEnabled = true,
     ),
     Property(
+        id = "sod2-vantos-lapas-pirciu-rezidencija",
         name = "Vantos Lapas - Pirčių Rezidencija",
         imageUrl = null,
         address = Address(
@@ -35,6 +37,7 @@ private fun mockedProperties(): List<Property> = listOf(
         isEnabled = true,
     ),
     Property(
+        id = "sod3-radviliu-sodyba",
         name = "Radvilių sodyba",
         imageUrl = null,
         address = Address(
