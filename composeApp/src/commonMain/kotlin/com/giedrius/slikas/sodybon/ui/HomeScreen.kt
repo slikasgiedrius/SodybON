@@ -31,14 +31,12 @@ import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.data.property.model.Property
 import com.giedrius.slikas.sodybon.data.property.model.getShortAddress
-import com.giedrius.slikas.sodybon.utils.getMockedPropertyList
 import dev.materii.pullrefresh.PullRefreshIndicator
 import dev.materii.pullrefresh.PullRefreshLayout
 import dev.materii.pullrefresh.rememberPullRefreshState
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
 import sodybon.composeapp.generated.resources.Res
 import sodybon.composeapp.generated.resources.compose_multiplatform
@@ -143,14 +141,4 @@ fun PropertiesList(
                 }
             }
         })
-}
-
-@Preview
-@Composable
-private fun PreviewPropertiesList() {
-    SodybOnTheme {
-        PropertiesList(
-            properties = getMockedPropertyList()
-        )
-    }
 }
