@@ -2,18 +2,15 @@ package com.giedrius.slikas.sodybon.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
@@ -24,15 +21,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
-import com.giedrius.slikas.sodybon.data.property.model.Address
 import com.giedrius.slikas.sodybon.data.property.model.Property
 import com.giedrius.slikas.sodybon.data.property.model.getShortAddress
 import com.giedrius.slikas.sodybon.utils.getMockedPropertyList
@@ -86,6 +82,7 @@ fun HomeScreen(
 fun PropertiesList(
     modifier: Modifier = Modifier,
     properties: List<Property>,
+    logoNotLoadedPlaceholder: Painter = painterResource(Res.drawable.compose_multiplatform),
 ) {
     LazyColumn(
         modifier = modifier
@@ -105,7 +102,7 @@ fun PropertiesList(
                     Column {
                         if (it.imageUrl.isNullOrEmpty()) {
                             Image(
-                                painter = painterResource(Res.drawable.compose_multiplatform),
+                                painter = logoNotLoadedPlaceholder,
                                 null,
                             )
                         } else {
