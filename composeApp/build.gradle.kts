@@ -43,6 +43,7 @@ kotlin {
             //Firebase
             implementation(libs.firebase.firestore)
             implementation(libs.firebase.common)
+            implementation(libs.firebase.auth)
             implementation(libs.kotlinx.serialization.json)
 
             //Koin
