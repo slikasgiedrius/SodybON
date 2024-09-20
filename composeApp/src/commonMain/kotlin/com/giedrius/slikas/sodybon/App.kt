@@ -2,11 +2,12 @@ package com.giedrius.slikas.sodybon
 
 import androidx.compose.runtime.Composable
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
-import com.giedrius.slikas.sodybon.screens.home.HomeScreen
+import com.giedrius.slikas.sodybon.screens.login.FirebaseLogin
 
 @Composable
 fun App() {
     SodybOnTheme {
-        HomeScreen()
+        FirebaseLogin()
+//        HomeScreen()
     }
 }

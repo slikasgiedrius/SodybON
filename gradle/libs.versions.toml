@@ -18,6 +18,7 @@ firebaseAuth = "2.1.0"
 junit = "4.13.2"
 kamelImage = "0.9.5"
 kermit = "2.0.4"
+kmpAuth = "2.1.0-alpha01"
 koin = "4.0.0-RC1"
 kotlin = "2.0.20"
 googleServices = "4.4.2"
@@ -34,6 +35,9 @@ firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = 
 firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseAuth" }
 kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamelImage" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
+kmpauth-firebase = { module = "io.github.mirzemehdi:kmpauth-firebase", version.ref = "kmpAuth" }
+kmpauth-google = { module = "io.github.mirzemehdi:kmpauth-google", version.ref = "kmpAuth" }
+kmpauth-uihelper = { module = "io.github.mirzemehdi:kmpauth-uihelper", version.ref = "kmpAuth" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
