@@ -1,4 +1,4 @@
-package com.giedrius.slikas.sodybon.ui
+package com.giedrius.slikas.sodybon.screens.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsets

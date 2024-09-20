@@ -1,4 +1,4 @@
-package com.giedrius.slikas.sodybon.ui
+package com.giedrius.slikas.sodybon.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
