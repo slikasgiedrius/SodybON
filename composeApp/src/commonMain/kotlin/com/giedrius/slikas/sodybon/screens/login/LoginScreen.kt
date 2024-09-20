@@ -19,15 +19,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.giedrius.slikas.sodybon.screens.home.HomeViewModel
 import com.mmk.kmpauth.firebase.google.GoogleButtonUiContainerFirebase
 import com.mmk.kmpauth.google.GoogleAuthCredentials
 import com.mmk.kmpauth.google.GoogleAuthProvider
 import com.mmk.kmpauth.uihelper.google.GoogleSignInButton
 import com.mmk.kmpauth.uihelper.google.GoogleSignInButtonIconOnly
 import dev.gitlive.firebase.auth.FirebaseUser
+import org.koin.compose.koinInject
 
 @Composable
-fun FirebaseLogin() {
+fun LoginScreen(
+    viewModel: HomeViewModel = koinInject(),
+) {
     GoogleAuthProvider.create(
         credentials = GoogleAuthCredentials(
             serverId = "311568248602-advol62mglp8dt0osotd0o1dbodcj9ta.apps.googleusercontent.com"
@@ -51,9 +55,14 @@ fun FirebaseLogin() {
                     signedInUserName = "Null User"
                     println("Error Result: ${result.exceptionOrNull()?.message}")
                 }
-
+                viewModel.updateUser()
             }
             Column {
+                Text(
+                    text = "UserRepository ${viewModel.uiState.value.currentUser?.displayName}",
+                    style = MaterialTheme.typography.body1,
+                    textAlign = TextAlign.Start,
+                )
                 Text(
                     text = signedInUserName,
                     style = MaterialTheme.typography.body1,
