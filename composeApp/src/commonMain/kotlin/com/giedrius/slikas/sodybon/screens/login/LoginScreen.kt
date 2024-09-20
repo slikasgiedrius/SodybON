@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.screens.home.HomeViewModel
 import com.mmk.kmpauth.firebase.google.GoogleButtonUiContainerFirebase
 import com.mmk.kmpauth.google.GoogleAuthCredentials
@@ -44,27 +45,17 @@ fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterVertically)
         ) {
-
-            var signedInUserName: String by remember { mutableStateOf("") }
             val onFirebaseResult: (Result<FirebaseUser?>) -> Unit = { result ->
                 if (result.isSuccess) {
-                    val firebaseUser = result.getOrNull()
-                    signedInUserName =
-                        firebaseUser?.displayName ?: firebaseUser?.email ?: "Null User"
+                    Logger.i { "Login with Google successful" }
                 } else {
-                    signedInUserName = "Null User"
-                    println("Error Result: ${result.exceptionOrNull()?.message}")
+                    Logger.i { "Login failed with result ${result.exceptionOrNull()?.message}" }
                 }
                 viewModel.updateUser()
             }
             Column {
                 Text(
-                    text = "UserRepository ${viewModel.uiState.value.currentUser?.displayName}",
-                    style = MaterialTheme.typography.body1,
-                    textAlign = TextAlign.Start,
-                )
-                Text(
-                    text = signedInUserName,
+                    text = "User ${viewModel.uiState.value.currentUser?.displayName}",
                     style = MaterialTheme.typography.body1,
                     textAlign = TextAlign.Start,
                 )
