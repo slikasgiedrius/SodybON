@@ -14,24 +14,24 @@
       },
       "oauth_client": [
         {
-          "client_id": "311568248602-vgvq1e967upkfrv7ljql4pcd9h4af8nb.apps.googleusercontent.com",
+          "client_id": "311568248602-advol62mglp8dt0osotd0o1dbodcj9ta.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCj17DMl0i1OqqATamWQ09TTn1negfkHGI"
+          "current_key": "AIzaSyDMKYlNtk858-oEIST1sGszIQgzbtxulGE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "311568248602-vgvq1e967upkfrv7ljql4pcd9h4af8nb.apps.googleusercontent.com",
+              "client_id": "311568248602-advol62mglp8dt0osotd0o1dbodcj9ta.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "311568248602-adr2c4hed34djmsne5veq3vkanp1eqjt.apps.googleusercontent.com",
+              "client_id": "311568248602-b1b3trdhsupkpcq03ggenlb12akg92qm.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.giedrius.slikas.sodybon"

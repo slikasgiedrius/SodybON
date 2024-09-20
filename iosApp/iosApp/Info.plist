@@ -39,6 +39,19 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>GIDClientID</key>
+	<string>311568248602-b1b3trdhsupkpcq03ggenlb12akg92qm.apps.googleusercontent.com</string>
+	<key>GIDServerClientID</key>
+	<string>311568248602-advol62mglp8dt0osotd0o1dbodcj9ta.apps.googleusercontent.com</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.311568248602-b1b3trdhsupkpcq03ggenlb12akg92qm</string>
+			</array>
+		</dict>
+	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
