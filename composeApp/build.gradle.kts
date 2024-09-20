@@ -59,7 +59,7 @@ kotlin {
             //Pull refresh
             implementation(libs.pullrefresh)
 
-            //Login
+            //Login with google
             implementation(libs.kmpauth.google)
             implementation(libs.kmpauth.firebase)
             implementation(libs.kmpauth.uihelper)
