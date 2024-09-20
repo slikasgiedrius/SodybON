@@ -12,7 +12,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.getString
 import org.koin.core.component.KoinComponent
+import sodybon.composeapp.generated.resources.Res
+import sodybon.composeapp.generated.resources.default_web_client_id
 
 data class LoginScreenUiState(
     val currentUser: FirebaseUser? = null,
@@ -29,7 +32,7 @@ class LoginViewModel(
         viewModelScope.launch {
             GoogleAuthProvider.create(
                 credentials = GoogleAuthCredentials(
-                    serverId = "311568248602-advol62mglp8dt0osotd0o1dbodcj9ta.apps.googleusercontent.com"
+                    serverId = getString(Res.string.default_web_client_id),
                 )
             )
             updateUser()

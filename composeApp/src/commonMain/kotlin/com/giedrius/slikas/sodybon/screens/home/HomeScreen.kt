@@ -1,6 +1,7 @@
 package com.giedrius.slikas.sodybon.screens.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -16,10 +18,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.compose.components.PropertyCard
 import com.giedrius.slikas.sodybon.data.property.model.Property
+import com.giedrius.slikas.sodybon.screens.login.LoginViewModel
 import dev.materii.pullrefresh.PullRefreshIndicator
 import dev.materii.pullrefresh.PullRefreshLayout
 import dev.materii.pullrefresh.rememberPullRefreshState
@@ -30,16 +34,17 @@ import sodybon.composeapp.generated.resources.compose_multiplatform
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = koinInject(),
+    homeViewModel: HomeViewModel = koinInject(),
+    loginViewModel: LoginViewModel = koinInject()
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by homeViewModel.uiState.collectAsState()
 
     val isRefreshing by remember {
         mutableStateOf(false)
     }
     val pullRefreshState = rememberPullRefreshState(
         refreshing = isRefreshing,
-        onRefresh = { viewModel.updateProperties() }
+        onRefresh = { homeViewModel.updateProperties() }
     )
 
     SodybOnTheme {
@@ -59,8 +64,14 @@ fun HomeScreen(
                 properties = uiState.properties,
             )
         }
+        Text(
+            text = loginViewModel.uiState.value.currentUser?.displayName ?: "Not logged in",
+            style = MaterialTheme.typography.h6,
+            fontWeight = FontWeight.SemiBold,
+        )
     }
 }
+
 
 @Composable
 fun PropertiesList(
