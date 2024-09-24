@@ -4,4 +4,5 @@ import dev.gitlive.firebase.auth.FirebaseUser
 
 interface UserRepository {
     suspend fun getCurrentUser(): FirebaseUser?
+    suspend fun signOut(): Unit
 }

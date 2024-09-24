@@ -63,6 +63,9 @@ kotlin {
             implementation(libs.kmpauth.google)
             implementation(libs.kmpauth.firebase)
             implementation(libs.kmpauth.uihelper)
+
+            //Navigation
+            implementation(libs.navigation.compose)
         }
 
         androidMain.dependencies {

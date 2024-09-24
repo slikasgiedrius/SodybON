@@ -9,4 +9,6 @@ class UserRepositoryImpl(
 ) : UserRepository {
 
     override suspend fun getCurrentUser(): FirebaseUser? = firebase.auth.currentUser
+
+    override suspend fun signOut(): Unit = firebase.auth.signOut()
 }

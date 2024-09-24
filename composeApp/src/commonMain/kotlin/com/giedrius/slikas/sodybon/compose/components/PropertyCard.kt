@@ -27,6 +27,7 @@ import io.kamel.image.asyncPainterResource
 fun PropertyCard(
     property: Property,
     logoNotLoadedPlaceholder: Painter,
+    onPropertyClicked: (String) -> Unit,
 ) {
     Card(
         modifier = Modifier.padding(bottom = 20.dp),
@@ -34,6 +35,7 @@ fun PropertyCard(
         shape = MaterialTheme.shapes.medium,
         elevation = 0.dp,
         onClick = {
+            onPropertyClicked(property.name)
             Logger.i { "List item clicked: ${property.name}" }
         }
     ) {

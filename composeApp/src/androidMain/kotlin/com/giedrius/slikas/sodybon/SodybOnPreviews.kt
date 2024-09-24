@@ -29,6 +29,7 @@ private fun PreviewPropertiesList() {
                     PropertyCard(
                         property = it,
                         logoNotLoadedPlaceholder = painterResource(it.getMockedPropertyImage()),
+                        onPropertyClicked = {}
                     )
                 }
             })

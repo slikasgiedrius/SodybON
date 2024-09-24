@@ -48,4 +48,9 @@ class LoginViewModel(
 
         }
     }
+
+    fun signOut() = viewModelScope.launch {
+        userRepository.signOut()
+        updateUser()
+    }
 }

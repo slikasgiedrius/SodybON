@@ -25,6 +25,7 @@ googleServices = "4.4.2"
 firebase-bom = "33.2.0"
 kotlinxSerializationJson = "1.7.1"
 ktor = "2.3.11"
+navigationCompose = "2.7.0-alpha03"
 pullrefresh = "1.4.0-beta03"
 
 [libraries]
@@ -55,6 +56,7 @@ androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 pullrefresh = { module = "dev.materii.pullrefresh:pullrefresh", version.ref = "pullrefresh" }
 
 [plugins]
