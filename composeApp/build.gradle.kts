@@ -77,6 +77,9 @@ kotlin {
 
             //Ktor
             implementation(libs.ktor.client.android)
+
+            //Splash screen
+            implementation(libs.androidx.core.splashscreen)
         }
 
         iosMain.dependencies {
