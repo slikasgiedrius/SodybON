@@ -1,4 +1,4 @@
-package com.giedrius.slikas.sodybon.screens.detailed
+package com.giedrius.slikas.sodybon.screens.detailed_property
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,7 @@ import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 
 @Composable
 fun DetailedArticle(
-    title: String?,
+    propertyId: String?,
     onNavigateBack: () -> Unit
 ) {
 
@@ -26,8 +26,8 @@ fun DetailedArticle(
                 Text("Go back")
             }
 
-            if (!title.isNullOrEmpty()) {
-                Text(title)
+            if (!propertyId.isNullOrEmpty()) {
+                Text(propertyId)
             }
         }
     }

@@ -35,7 +35,7 @@ fun PropertyCard(
         shape = MaterialTheme.shapes.medium,
         elevation = 0.dp,
         onClick = {
-            onPropertyClicked(property.name)
+            onPropertyClicked(property.id)
             Logger.i { "List item clicked: ${property.name}" }
         }
     ) {

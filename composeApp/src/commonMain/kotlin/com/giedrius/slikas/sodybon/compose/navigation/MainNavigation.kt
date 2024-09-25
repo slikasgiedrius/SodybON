@@ -13,9 +13,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.giedrius.slikas.sodybon.compose.navigation.MainNavigationDirections.Actions.navigateBack
-import com.giedrius.slikas.sodybon.compose.navigation.MainNavigationDirections.Actions.openArticle
+import com.giedrius.slikas.sodybon.compose.navigation.MainNavigationDirections.Actions.openDetailedProperty
 import com.giedrius.slikas.sodybon.compose.navigation.Navigations.MAIN
-import com.giedrius.slikas.sodybon.screens.detailed.DetailedArticle
+import com.giedrius.slikas.sodybon.screens.detailed_property.DetailedArticle
 import com.giedrius.slikas.sodybon.screens.home.HomeScreen
 import com.giedrius.slikas.sodybon.screens.profile.ProfileScreen
 
@@ -42,21 +42,21 @@ fun MainNavigation(
                 ) {
                     HomeScreen(
                         onPropertyClicked = {
-                            navController.openArticle(articleTitle = it)
+                            navController.openDetailedProperty(propertyId = it)
                         }
                     )
                 }
             }
             composable(
-                route = MainNavigationDirections.Routes.ARTICLE,
+                route = MainNavigationDirections.Routes.DETAILED_PROPERTY,
                 arguments = listOf(
-                    navArgument(name = MainNavigationDirections.ArticleArgs.TITLE) {
+                    navArgument(name = MainNavigationDirections.DetailedPropertyArgs.PROPERTY_ID) {
                         type = NavType.StringType
                     }
                 )
             ) {
                 DetailedArticle(
-                    title = it.arguments?.getString(MainNavigationDirections.ArticleArgs.TITLE),
+                    propertyId = it.arguments?.getString(MainNavigationDirections.DetailedPropertyArgs.PROPERTY_ID),
                     onNavigateBack = {
                         navController.navigateBack()
                     }
