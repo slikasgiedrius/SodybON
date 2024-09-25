@@ -12,13 +12,14 @@ import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 
 @Composable
 fun DetailedArticle(
+    modifier: Modifier = Modifier,
     propertyId: String?,
     onNavigateBack: () -> Unit
 ) {
 
     SodybOnTheme {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

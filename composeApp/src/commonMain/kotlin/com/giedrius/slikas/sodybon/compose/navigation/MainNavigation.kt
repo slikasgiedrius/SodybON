@@ -3,9 +3,13 @@ package com.giedrius.slikas.sodybon.compose.navigation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Divider
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -36,7 +40,9 @@ fun MainNavigation(
                 route = MainNavigationDirections.Routes.HOME
             ) {
                 Column(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(bottom = BOTTOM_INSET_HEIGHT.dp),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -56,6 +62,9 @@ fun MainNavigation(
                 )
             ) {
                 DetailedArticle(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(bottom = BOTTOM_INSET_HEIGHT.dp),
                     propertyId = it.arguments?.getString(MainNavigationDirections.DetailedPropertyArgs.PROPERTY_ID),
                     onNavigateBack = {
                         navController.navigateBack()
