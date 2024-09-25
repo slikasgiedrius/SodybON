@@ -15,6 +15,7 @@ import dev.gitlive.firebase.auth.FirebaseUser
 
 @Composable
 fun GoogleLogin(
+    modifier: Modifier = Modifier,
     onUpdateUser: () -> Unit,
 ) {
     val onFirebaseResult: (Result<FirebaseUser?>) -> Unit = { result ->
@@ -27,6 +28,7 @@ fun GoogleLogin(
     }
 
     GoogleButtonUiContainerFirebase(
+        modifier = modifier,
         onResult = onFirebaseResult,
     ) {
         GoogleSignInButton(
