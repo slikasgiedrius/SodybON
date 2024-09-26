@@ -3,6 +3,7 @@ package com.giedrius.slikas.sodybon.screens.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.giedrius.slikas.sodybon.data.user.UserRepository
+import com.giedrius.slikas.sodybon.data.user.model.User
 import com.mmk.kmpauth.google.GoogleAuthCredentials
 import com.mmk.kmpauth.google.GoogleAuthProvider
 import dev.gitlive.firebase.auth.FirebaseUser
@@ -17,7 +18,7 @@ import sodybon.composeapp.generated.resources.Res
 import sodybon.composeapp.generated.resources.default_web_client_id
 
 data class LoginScreenUiState(
-    val currentUser: FirebaseUser? = null,
+    val currentUser: User? = null,
 )
 
 class LoginViewModel(

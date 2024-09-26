@@ -1,8 +1,8 @@
 package com.giedrius.slikas.sodybon.data.user
 
-import dev.gitlive.firebase.auth.FirebaseUser
+import com.giedrius.slikas.sodybon.data.user.model.User
 
 interface UserRepository {
-    suspend fun getCurrentUser(): FirebaseUser?
-    suspend fun signOut(): Unit
+    suspend fun getCurrentUser(): User?
+    suspend fun signOut()
 }
