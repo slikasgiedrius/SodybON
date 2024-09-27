@@ -40,12 +40,14 @@ fun ProfileScreen(
 ) {
     val uiState by loginViewModel.uiState.collectAsState()
 
-    ProfileScreenContent(
-        currentProfile = uiState.currentProfile,
-        modifier = modifier,
-        onUpdateUserClicked = { loginViewModel.updateUser() },
-        onSignOutClicked = { loginViewModel.signOut() },
-    )
+    SodybOnTheme {
+        ProfileScreenContent(
+            currentProfile = uiState.currentProfile,
+            modifier = modifier,
+            onUpdateUserClicked = { loginViewModel.updateUser() },
+            onSignOutClicked = { loginViewModel.signOut() },
+        )
+    }
 }
 
 @Composable
@@ -55,73 +57,71 @@ fun ProfileScreenContent(
     onUpdateUserClicked: () -> Unit,
     onSignOutClicked: () -> Unit,
 ) {
-    SodybOnTheme {
-        Column(
-            modifier = modifier
+    Column(
+        modifier = modifier
+    ) {
+        // top row
+        Row(
+            modifier = Modifier.fillMaxWidth().height(50.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            // top row
-            Row(
-                modifier = Modifier.fillMaxWidth().height(50.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column {
-                    if (currentProfile == null) {
-                        GoogleLogin(
-                            modifier = Modifier.padding(horizontal = 16.dp),
-                            onUpdateUser = { onUpdateUserClicked() },
-                        )
-                    } else {
-                        Row {
-                            if (currentProfile.photoUrl != null) {
-                                KamelImage(modifier = Modifier.size(48.dp).clip(CircleShape),
-                                    resource = asyncPainterResource(currentProfile.photoUrl),
-                                    contentDescription = "",
-                                    contentScale = ContentScale.Fit,
-                                    onLoading = { CircularProgressIndicator(it) },
-                                    onFailure = {
-                                        Column {
-                                            Text(
-                                                text = "Failed to load",
-                                                fontWeight = FontWeight.Bold,
-                                            )
-                                        }
-                                    })
-                            } else {
-                                Icon(
-                                    Icons.Default.AccountCircle,
-                                    contentDescription = currentProfile.firstName
-                                        ?: BottomBarTabs.Profile.name,
-                                )
-                            }
-                            Text(
-                                text = currentProfile.fullName ?: "Not logged in",
-                                style = MaterialTheme.typography.h6,
-                                fontWeight = FontWeight.SemiBold,
+            Column {
+                if (currentProfile == null) {
+                    GoogleLogin(
+                        modifier = Modifier.padding(horizontal = 16.dp),
+                        onUpdateUser = { onUpdateUserClicked() },
+                    )
+                } else {
+                    Row {
+                        if (currentProfile.photoUrl != null) {
+                            KamelImage(modifier = Modifier.size(48.dp).clip(CircleShape),
+                                resource = asyncPainterResource(currentProfile.photoUrl),
+                                contentDescription = "",
+                                contentScale = ContentScale.Fit,
+                                onLoading = { CircularProgressIndicator(it) },
+                                onFailure = {
+                                    Column {
+                                        Text(
+                                            text = "Failed to load",
+                                            fontWeight = FontWeight.Bold,
+                                        )
+                                    }
+                                })
+                        } else {
+                            Icon(
+                                Icons.Default.AccountCircle,
+                                contentDescription = currentProfile.firstName
+                                    ?: BottomBarTabs.Profile.name,
                             )
                         }
+                        Text(
+                            text = currentProfile.fullName ?: "Not logged in",
+                            style = MaterialTheme.typography.h6,
+                            fontWeight = FontWeight.SemiBold,
+                        )
                     }
                 }
-
             }
 
-            // content row
-            Row(
-                modifier = Modifier.fillMaxWidth().weight(0.5F),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(text = "Some Other Contents")
-            }
+        }
 
-            // bottom row
-            Row(
-                modifier = Modifier.fillMaxWidth().height(100.dp),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Button(onClick = { onSignOutClicked() }) {
-                    Text("Sign out")
-                }
+        // content row
+        Row(
+            modifier = Modifier.fillMaxWidth().weight(0.5F),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(text = "Some Other Contents")
+        }
+
+        // bottom row
+        Row(
+            modifier = Modifier.fillMaxWidth().height(100.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Button(onClick = { onSignOutClicked() }) {
+                Text("Sign out")
             }
         }
     }

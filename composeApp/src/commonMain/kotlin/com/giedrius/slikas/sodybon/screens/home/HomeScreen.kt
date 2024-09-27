@@ -49,7 +49,7 @@ fun HomeScreen(
                 )
             }
         ) {
-            PropertiesList(
+            HomeScreenContent(
                 properties = uiState.properties,
                 onPropertyClicked = onPropertyClicked
             )
@@ -57,13 +57,12 @@ fun HomeScreen(
     }
 }
 
-
 @Composable
-fun PropertiesList(
+fun HomeScreenContent(
+    onPropertyClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
     properties: List<Property>,
     logoNotLoadedPlaceholder: Painter = painterResource(Res.drawable.compose_multiplatform),
-    onPropertyClicked: (String) -> Unit,
 ) {
     LazyColumn(
         modifier = modifier
@@ -77,5 +76,6 @@ fun PropertiesList(
                     onPropertyClicked = onPropertyClicked
                 )
             }
-        })
+        }
+    )
 }
