@@ -59,7 +59,7 @@ fun BottomBar(
             BottomNavigation(
                 modifier = Modifier.height(CUSTOM_BOTTOM_BAR_HEIGHT),
             ) {
-                //Home tab
+                // Home tab
                 BottomNavigationItem(
                     icon = {
                         Icon(
@@ -75,18 +75,16 @@ fun BottomBar(
                         navController.navigate(
                             route = BottomBarTabs.Home.name
                         ) {
-                            navController.graph.startDestinationRoute?.let {
-                                popUpTo(it) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
+                            popUpTo(navController.graph.startDestinationRoute!!) {
+                                inclusive = false
                             }
+                            launchSingleTop = true
+                            restoreState = true
                         }
                     },
                 )
 
-                //Profile tab
+                // Profile tab
                 BottomNavigationItem(
                     icon = {
                         if (uiState.currentUser?.photoUrl != null) {
@@ -126,13 +124,11 @@ fun BottomBar(
                         navController.navigate(
                             route = BottomBarTabs.Profile.name
                         ) {
-                            navController.graph.startDestinationRoute?.let {
-                                popUpTo(it) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
+                            popUpTo(navController.graph.startDestinationRoute!!) {
+                                inclusive = false
                             }
+                            launchSingleTop = true
+                            restoreState = true
                         }
                     },
                 )
