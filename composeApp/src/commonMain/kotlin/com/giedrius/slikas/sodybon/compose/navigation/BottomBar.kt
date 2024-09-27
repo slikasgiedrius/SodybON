@@ -82,12 +82,12 @@ fun BottomBar(
                 // Profile tab
                 BottomNavigationItem(
                     icon = {
-                        if (uiState.currentUser?.photoUrl != null) {
+                        if (uiState.currentProfile?.photoUrl != null) {
                             KamelImage(
                                 modifier = Modifier
                                     .size(30.dp)
                                     .clip(CircleShape),
-                                resource = asyncPainterResource(uiState.currentUser?.photoUrl!!),
+                                resource = asyncPainterResource(uiState.currentProfile?.photoUrl!!),
                                 contentDescription = "",
                                 contentScale = ContentScale.Fit,
                                 onLoading = { CircularProgressIndicator(it) },
@@ -102,14 +102,14 @@ fun BottomBar(
                         } else {
                             Icon(
                                 Icons.Default.AccountCircle,
-                                contentDescription = uiState.currentUser?.firstName
+                                contentDescription = uiState.currentProfile?.firstName
                                     ?: BottomBarTabs.Profile.name,
                             )
                         }
                     },
                     label = {
                         Text(
-                            text = uiState.currentUser?.firstName ?: BottomBarTabs.Profile.name
+                            text = uiState.currentProfile?.firstName ?: BottomBarTabs.Profile.name
                         )
                     },
                     selected = BottomBarTabs.Profile == selectedScreen,

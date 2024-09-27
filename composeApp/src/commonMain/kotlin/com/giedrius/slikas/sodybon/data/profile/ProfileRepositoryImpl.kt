@@ -1,17 +1,17 @@
-package com.giedrius.slikas.sodybon.data.user
+package com.giedrius.slikas.sodybon.data.profile
 
-import com.giedrius.slikas.sodybon.data.user.model.User
+import com.giedrius.slikas.sodybon.data.profile.model.Profile
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.auth
 
-class UserRepositoryImpl(
+class ProfileRepositoryImpl(
     private val firebase: Firebase
-) : UserRepository {
+) : ProfileRepository {
 
-    override suspend fun getCurrentUser(): User? {
+    override suspend fun getCurrentProfile(): Profile? {
         val firebaseUser = firebase.auth.currentUser
         return if (firebaseUser != null) {
-            User(
+            Profile(
                 uid = firebaseUser.uid,
                 email = firebaseUser.email,
                 phoneNumber = firebaseUser.phoneNumber,

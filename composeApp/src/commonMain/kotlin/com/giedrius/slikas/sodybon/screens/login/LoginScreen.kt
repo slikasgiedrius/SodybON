@@ -34,7 +34,7 @@ fun LoginScreen(
 
             Column {
                 Text(
-                    text = "User ${uiState.currentUser?.fullName}",
+                    text = "User ${uiState.currentProfile?.fullName}",
                     style = MaterialTheme.typography.body1,
                     textAlign = TextAlign.Start,
                 )

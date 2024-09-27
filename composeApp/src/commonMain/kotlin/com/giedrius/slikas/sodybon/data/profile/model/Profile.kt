@@ -1,6 +1,6 @@
-package com.giedrius.slikas.sodybon.data.user.model
+package com.giedrius.slikas.sodybon.data.profile.model
 
-data class User(
+data class Profile(
     val uid: String?,
     val email: String?,
     val phoneNumber: String?,

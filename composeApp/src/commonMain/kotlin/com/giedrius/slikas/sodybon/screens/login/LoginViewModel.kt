@@ -2,8 +2,8 @@ package com.giedrius.slikas.sodybon.screens.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.giedrius.slikas.sodybon.data.user.UserRepository
-import com.giedrius.slikas.sodybon.data.user.model.User
+import com.giedrius.slikas.sodybon.data.profile.ProfileRepository
+import com.giedrius.slikas.sodybon.data.profile.model.Profile
 import com.mmk.kmpauth.google.GoogleAuthCredentials
 import com.mmk.kmpauth.google.GoogleAuthProvider
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,11 +17,11 @@ import sodybon.composeapp.generated.resources.Res
 import sodybon.composeapp.generated.resources.default_web_client_id
 
 data class LoginScreenUiState(
-    val currentUser: User? = null,
+    val currentProfile: Profile? = null,
 )
 
 class LoginViewModel(
-    private val userRepository: UserRepository,
+    private val profileRepository: ProfileRepository,
 ) : ViewModel(), KoinComponent {
 
     private val _uiState = MutableStateFlow(LoginScreenUiState())
@@ -42,7 +42,7 @@ class LoginViewModel(
         viewModelScope.launch {
             _uiState.update {
                 it.copy(
-                    currentUser = userRepository.getCurrentUser(),
+                    currentProfile = profileRepository.getCurrentProfile(),
                 )
             }
 
@@ -50,7 +50,7 @@ class LoginViewModel(
     }
 
     fun signOut() = viewModelScope.launch {
-        userRepository.signOut()
+        profileRepository.signOut()
         updateUser()
     }
 }

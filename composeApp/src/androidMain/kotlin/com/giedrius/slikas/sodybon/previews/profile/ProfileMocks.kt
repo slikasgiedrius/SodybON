@@ -1,9 +1,9 @@
-package com.giedrius.slikas.sodybon.utils.user
+package com.giedrius.slikas.sodybon.previews.profile
 
-import com.giedrius.slikas.sodybon.data.user.model.User
+import com.giedrius.slikas.sodybon.data.profile.model.Profile
 
-fun getMockedUser(): User {
-    return User(
+fun getMockedUser(): Profile {
+    return Profile(
         uid = "mockedUid",
         email = "mockedEmail",
         phoneNumber = "mockedPhoneNumber",

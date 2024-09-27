@@ -1,4 +1,4 @@
-package com.giedrius.slikas.sodybon.utils.property
+package com.giedrius.slikas.sodybon.previews.property
 
 import com.giedrius.slikas.sodybon.R
 import com.giedrius.slikas.sodybon.data.property.model.Address

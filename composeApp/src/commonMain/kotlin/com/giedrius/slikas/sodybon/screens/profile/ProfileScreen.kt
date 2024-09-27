@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.compose.components.GoogleLogin
 import com.giedrius.slikas.sodybon.compose.navigation.BottomBarTabs
-import com.giedrius.slikas.sodybon.data.user.model.User
+import com.giedrius.slikas.sodybon.data.profile.model.Profile
 import com.giedrius.slikas.sodybon.screens.login.LoginViewModel
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
@@ -41,7 +41,7 @@ fun ProfileScreen(
     val uiState by loginViewModel.uiState.collectAsState()
 
     ProfileScreenContent(
-        currentUser = uiState.currentUser,
+        currentProfile = uiState.currentProfile,
         modifier = modifier,
         onUpdateUserClicked = { loginViewModel.updateUser() },
         onSignOutClicked = { loginViewModel.signOut() },
@@ -50,7 +50,7 @@ fun ProfileScreen(
 
 @Composable
 fun ProfileScreenContent(
-    currentUser: User?,
+    currentProfile: Profile?,
     modifier: Modifier = Modifier,
     onUpdateUserClicked: () -> Unit,
     onSignOutClicked: () -> Unit,
@@ -65,16 +65,16 @@ fun ProfileScreenContent(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column {
-                    if (currentUser == null) {
+                    if (currentProfile == null) {
                         GoogleLogin(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             onUpdateUser = { onUpdateUserClicked() },
                         )
                     } else {
                         Row {
-                            if (currentUser.photoUrl != null) {
+                            if (currentProfile.photoUrl != null) {
                                 KamelImage(modifier = Modifier.size(48.dp).clip(CircleShape),
-                                    resource = asyncPainterResource(currentUser.photoUrl),
+                                    resource = asyncPainterResource(currentProfile.photoUrl),
                                     contentDescription = "",
                                     contentScale = ContentScale.Fit,
                                     onLoading = { CircularProgressIndicator(it) },
@@ -89,12 +89,12 @@ fun ProfileScreenContent(
                             } else {
                                 Icon(
                                     Icons.Default.AccountCircle,
-                                    contentDescription = currentUser.firstName
+                                    contentDescription = currentProfile.firstName
                                         ?: BottomBarTabs.Profile.name,
                                 )
                             }
                             Text(
-                                text = currentUser.fullName ?: "Not logged in",
+                                text = currentProfile.fullName ?: "Not logged in",
                                 style = MaterialTheme.typography.h6,
                                 fontWeight = FontWeight.SemiBold,
                             )
