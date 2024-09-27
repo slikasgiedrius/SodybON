@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.compose.components.GoogleLogin
 import com.giedrius.slikas.sodybon.compose.navigation.BottomBarTabs
+import com.giedrius.slikas.sodybon.data.user.model.User
 import com.giedrius.slikas.sodybon.screens.login.LoginViewModel
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
@@ -39,32 +40,41 @@ fun ProfileScreen(
 ) {
     val uiState by loginViewModel.uiState.collectAsState()
 
+    ProfileScreenContent(
+        currentUser = uiState.currentUser,
+        modifier = modifier,
+        onUpdateUserClicked = { loginViewModel.updateUser() },
+        onSignOutClicked = { loginViewModel.signOut() },
+    )
+}
+
+@Composable
+fun ProfileScreenContent(
+    currentUser: User?,
+    modifier: Modifier = Modifier,
+    onUpdateUserClicked: () -> Unit,
+    onSignOutClicked: () -> Unit,
+) {
     SodybOnTheme {
         Column(
             modifier = modifier
         ) {
-
             // top row
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
+                modifier = Modifier.fillMaxWidth().height(50.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column {
-                    if (uiState.currentUser == null) {
+                    if (currentUser == null) {
                         GoogleLogin(
                             modifier = Modifier.padding(horizontal = 16.dp),
-                            onUpdateUser = { loginViewModel.updateUser() },
+                            onUpdateUser = { onUpdateUserClicked() },
                         )
                     } else {
                         Row {
-                            if (uiState.currentUser?.photoUrl != null) {
-                                KamelImage(
-                                    modifier = Modifier
-                                        .size(48.dp)
-                                        .clip(CircleShape),
-                                    resource = asyncPainterResource(uiState.currentUser?.photoUrl!!),
+                            if (currentUser.photoUrl != null) {
+                                KamelImage(modifier = Modifier.size(48.dp).clip(CircleShape),
+                                    resource = asyncPainterResource(currentUser.photoUrl),
                                     contentDescription = "",
                                     contentScale = ContentScale.Fit,
                                     onLoading = { CircularProgressIndicator(it) },
@@ -79,12 +89,12 @@ fun ProfileScreen(
                             } else {
                                 Icon(
                                     Icons.Default.AccountCircle,
-                                    contentDescription = uiState.currentUser?.firstName
+                                    contentDescription = currentUser.firstName
                                         ?: BottomBarTabs.Profile.name,
                                 )
                             }
                             Text(
-                                text = uiState.currentUser?.fullName ?: "Not logged in",
+                                text = currentUser.fullName ?: "Not logged in",
                                 style = MaterialTheme.typography.h6,
                                 fontWeight = FontWeight.SemiBold,
                             )
@@ -96,9 +106,7 @@ fun ProfileScreen(
 
             // content row
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(0.5F),
+                modifier = Modifier.fillMaxWidth().weight(0.5F),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -107,17 +115,14 @@ fun ProfileScreen(
 
             // bottom row
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(100.dp),
+                modifier = Modifier.fillMaxWidth().height(100.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Button(onClick = { loginViewModel.signOut() }) {
+                Button(onClick = { onSignOutClicked() }) {
                     Text("Sign out")
                 }
             }
-
         }
     }
 }

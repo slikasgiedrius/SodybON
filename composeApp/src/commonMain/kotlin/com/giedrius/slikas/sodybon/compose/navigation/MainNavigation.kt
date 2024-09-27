@@ -23,7 +23,7 @@ internal object Navigations {
 @Composable
 fun MainNavigation(
     navController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     NavHost(
         navController = navController,

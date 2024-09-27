@@ -6,7 +6,6 @@ import com.giedrius.slikas.sodybon.data.user.UserRepository
 import com.giedrius.slikas.sodybon.data.user.model.User
 import com.mmk.kmpauth.google.GoogleAuthCredentials
 import com.mmk.kmpauth.google.GoogleAuthProvider
-import dev.gitlive.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
