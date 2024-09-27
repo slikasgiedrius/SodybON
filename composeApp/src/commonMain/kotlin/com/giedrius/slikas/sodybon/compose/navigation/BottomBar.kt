@@ -75,11 +75,13 @@ fun BottomBar(
                         navController.navigate(
                             route = BottomBarTabs.Home.name
                         ) {
-                            popUpTo(navController.graph.startDestinationRoute!!) {
-                                inclusive = false
+                            navController.graph.startDestinationRoute?.let {
+                                popUpTo(it) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
                             }
-                            launchSingleTop = true
-                            restoreState = true
                         }
                     },
                 )
@@ -124,11 +126,13 @@ fun BottomBar(
                         navController.navigate(
                             route = BottomBarTabs.Profile.name
                         ) {
-                            popUpTo(navController.graph.startDestinationRoute!!) {
-                                inclusive = false
+                            navController.graph.startDestinationRoute?.let {
+                                popUpTo(it) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
                             }
-                            launchSingleTop = true
-                            restoreState = true
                         }
                     },
                 )
