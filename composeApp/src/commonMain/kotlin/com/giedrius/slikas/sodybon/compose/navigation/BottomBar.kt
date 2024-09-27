@@ -1,14 +1,20 @@
 package com.giedrius.slikas.sodybon.compose.navigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -27,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import co.touchlab.kermit.Logger
+import com.giedrius.slikas.sodybon.compose.base.BOTTOM_INSET_HEIGHT
 import com.giedrius.slikas.sodybon.compose.base.CUSTOM_BOTTOM_BAR_HEIGHT
 import com.giedrius.slikas.sodybon.screens.login.LoginViewModel
 import io.kamel.image.KamelImage
@@ -77,7 +84,6 @@ fun BottomBar(
                             }
                         }
                     },
-                    modifier = Modifier.padding(0.dp)
                 )
 
                 //Profile tab
@@ -103,11 +109,16 @@ fun BottomBar(
                         } else {
                             Icon(
                                 Icons.Default.AccountCircle,
-                                contentDescription = uiState.currentUser?.firstName ?: BottomBarTabs.Profile.name,
+                                contentDescription = uiState.currentUser?.firstName
+                                    ?: BottomBarTabs.Profile.name,
                             )
                         }
                     },
-                    label = { Text(text = uiState.currentUser?.firstName ?: BottomBarTabs.Profile.name) },
+                    label = {
+                        Text(
+                            text = uiState.currentUser?.firstName ?: BottomBarTabs.Profile.name
+                        )
+                    },
                     selected = BottomBarTabs.Profile == selectedScreen,
                     onClick = {
                         Logger.i { "Bottom navigation item clicked: ${BottomBarTabs.Profile.name}" }
@@ -124,13 +135,17 @@ fun BottomBar(
                             }
                         }
                     },
-                    modifier = Modifier.padding(0.dp)
                 )
             }
         },
         content = {
             MainNavigation(
-                navController = navController
+                navController = navController,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colors.background)
+                    .windowInsetsPadding(WindowInsets.safeDrawing)
+                    .padding(bottom = BOTTOM_INSET_HEIGHT),
             )
         }
     )

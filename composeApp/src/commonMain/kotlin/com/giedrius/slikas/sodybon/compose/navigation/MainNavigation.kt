@@ -32,30 +32,25 @@ internal object Navigations {
 
 @Composable
 fun MainNavigation(
-    navController: NavHostController
+    navController: NavHostController,
+    modifier: Modifier = Modifier
 ) {
     NavHost(
         navController = navController,
-        startDestination = MAIN
+        startDestination = MAIN,
+        modifier = modifier,
     ) {
         navigation(startDestination = MainNavigationDirections.Routes.HOME, route = MAIN) {
             composable(
                 route = MainNavigationDirections.Routes.HOME
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(bottom = BOTTOM_INSET_HEIGHT),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    HomeScreen(
-                        onPropertyClicked = {
-                            navController.openDetailedProperty(propertyId = it)
-                        }
-                    )
-                }
+                HomeScreen(
+                    onPropertyClicked = {
+                        navController.openDetailedProperty(propertyId = it)
+                    }
+                )
             }
+
             composable(
                 route = MainNavigationDirections.Routes.DETAILED_PROPERTY,
                 arguments = listOf(
@@ -65,9 +60,7 @@ fun MainNavigation(
                 )
             ) {
                 DetailedArticle(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(bottom = BOTTOM_INSET_HEIGHT),
+                    modifier = Modifier.fillMaxSize(),
                     propertyId = it.arguments?.getString(MainNavigationDirections.DetailedPropertyArgs.PROPERTY_ID),
                     onNavigateBack = {
                         navController.navigateBack()
@@ -75,12 +68,14 @@ fun MainNavigation(
                 )
             }
             composable(MainNavigationDirections.Routes.PROFILE) {
-                ProfileScreen(
-                    modifier = Modifier.padding(
-                        top = TOP_INSET_HEIGHT,
-                        bottom = CUSTOM_BOTTOM_BAR_HEIGHT,
-                    )
-                )
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+
+                }
+                ProfileScreen()
             }
         }
     }

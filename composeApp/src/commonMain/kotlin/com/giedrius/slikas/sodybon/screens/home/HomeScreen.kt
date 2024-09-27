@@ -54,9 +54,6 @@ fun HomeScreen(
             }
         ) {
             PropertiesList(
-                modifier = Modifier
-                    .background(MaterialTheme.colors.background)
-                    .windowInsetsPadding(WindowInsets.safeDrawing),
                 properties = uiState.properties,
                 onPropertyClicked = onPropertyClicked
             )
