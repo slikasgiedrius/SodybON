@@ -16,6 +16,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
+import com.giedrius.slikas.sodybon.compose.base.BOTTOM_INSET_HEIGHT
+import com.giedrius.slikas.sodybon.compose.base.CUSTOM_BOTTOM_BAR_HEIGHT
+import com.giedrius.slikas.sodybon.compose.base.TOP_INSET_HEIGHT
 import com.giedrius.slikas.sodybon.compose.navigation.MainNavigationDirections.Actions.navigateBack
 import com.giedrius.slikas.sodybon.compose.navigation.MainNavigationDirections.Actions.openDetailedProperty
 import com.giedrius.slikas.sodybon.compose.navigation.Navigations.MAIN
@@ -42,7 +45,7 @@ fun MainNavigation(
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(bottom = BOTTOM_INSET_HEIGHT.dp),
+                        .padding(bottom = BOTTOM_INSET_HEIGHT),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -64,7 +67,7 @@ fun MainNavigation(
                 DetailedArticle(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(bottom = BOTTOM_INSET_HEIGHT.dp),
+                        .padding(bottom = BOTTOM_INSET_HEIGHT),
                     propertyId = it.arguments?.getString(MainNavigationDirections.DetailedPropertyArgs.PROPERTY_ID),
                     onNavigateBack = {
                         navController.navigateBack()
@@ -72,7 +75,12 @@ fun MainNavigation(
                 )
             }
             composable(MainNavigationDirections.Routes.PROFILE) {
-                ProfileScreen()
+                ProfileScreen(
+                    modifier = Modifier.padding(
+                        top = TOP_INSET_HEIGHT,
+                        bottom = CUSTOM_BOTTOM_BAR_HEIGHT,
+                    )
+                )
             }
         }
     }

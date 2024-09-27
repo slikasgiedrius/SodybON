@@ -12,9 +12,13 @@ class UserRepositoryImpl(
         val firebaseUser = firebase.auth.currentUser
         return if (firebaseUser != null) {
             User(
-                displayName = firebase.auth.currentUser?.displayName,
+                uid = firebaseUser.uid,
+                email = firebaseUser.email,
+                phoneNumber = firebaseUser.phoneNumber,
+                photoUrl = firebaseUser.photoURL,
                 firstName = firebaseUser.displayName?.substringBefore(" "),
                 lastName = firebaseUser.displayName?.substringAfter(" "),
+                fullName = firebase.auth.currentUser?.displayName,
             )
         } else {
             null
