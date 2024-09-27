@@ -16,9 +16,9 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.data.property.model.Property
 import com.giedrius.slikas.sodybon.data.property.model.getShortAddress
+import com.giedrius.slikas.sodybon.utils.Home.logListItemClicked
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 
@@ -36,7 +36,7 @@ fun PropertyCard(
         elevation = 0.dp,
         onClick = {
             onPropertyClicked(property.id)
-            Logger.i { "List item clicked: ${property.name}" }
+            logListItemClicked(property.name)
         }
     ) {
         Column {

@@ -32,15 +32,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
-import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.base.BOTTOM_INSET_HEIGHT
 import com.giedrius.slikas.sodybon.compose.base.CUSTOM_BOTTOM_BAR_HEIGHT
 import com.giedrius.slikas.sodybon.screens.login.LoginViewModel
+import com.giedrius.slikas.sodybon.utils.Navigation.logBottomNavigationItemClicked
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.koin.compose.koinInject
 
-internal enum class BottomBarTabs {
+enum class BottomBarTabs {
     Home,
     Profile,
 }
@@ -70,19 +70,12 @@ fun BottomBar(
                     label = { Text(BottomBarTabs.Home.name) },
                     selected = BottomBarTabs.Home == selectedScreen,
                     onClick = {
-                        Logger.i { "Bottom navigation item clicked: ${BottomBarTabs.Home.name}" }
+                        logBottomNavigationItemClicked(BottomBarTabs.Home.name)
                         selectedScreen = BottomBarTabs.Home
-                        navController.navigate(
-                            route = BottomBarTabs.Home.name
-                        ) {
-                            navController.graph.startDestinationRoute?.let {
-                                popUpTo(it) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        }
+                        navigateToTab(
+                            navController = navController,
+                            tab = BottomBarTabs.Home
+                        )
                     },
                 )
 
@@ -121,19 +114,12 @@ fun BottomBar(
                     },
                     selected = BottomBarTabs.Profile == selectedScreen,
                     onClick = {
-                        Logger.i { "Bottom navigation item clicked: ${BottomBarTabs.Profile.name}" }
+                        logBottomNavigationItemClicked(BottomBarTabs.Profile.name)
                         selectedScreen = BottomBarTabs.Profile
-                        navController.navigate(
-                            route = BottomBarTabs.Profile.name
-                        ) {
-                            navController.graph.startDestinationRoute?.let {
-                                popUpTo(it) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        }
+                        navigateToTab(
+                            navController = navController,
+                            tab = BottomBarTabs.Profile
+                        )
                     },
                 )
             }

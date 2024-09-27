@@ -1,14 +1,13 @@
 package com.giedrius.slikas.sodybon.compose.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import co.touchlab.kermit.Logger
+import com.giedrius.slikas.sodybon.utils.Login.logLoginFailed
+import com.giedrius.slikas.sodybon.utils.Login.logLoginWithGoogleSuccessful
 import com.mmk.kmpauth.firebase.google.GoogleButtonUiContainerFirebase
 import com.mmk.kmpauth.uihelper.google.GoogleSignInButton
 import dev.gitlive.firebase.auth.FirebaseUser
@@ -20,9 +19,9 @@ fun GoogleLogin(
 ) {
     val onFirebaseResult: (Result<FirebaseUser?>) -> Unit = { result ->
         if (result.isSuccess) {
-            Logger.i { "Login with Google successful" }
+            logLoginWithGoogleSuccessful()
         } else {
-            Logger.i { "Login failed with result ${result.exceptionOrNull()?.message}" }
+            logLoginFailed(errorMessage = result.exceptionOrNull()?.message.toString())
         }
         onUpdateUser.invoke()
     }
