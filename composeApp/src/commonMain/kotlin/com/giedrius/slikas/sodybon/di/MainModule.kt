@@ -16,8 +16,6 @@ fun mainModule() = module {
     }
 
     single {
-        ProfileViewModel(
-            profileRepository = get(),
-        )
+        ProfileViewModel()
     }
 }

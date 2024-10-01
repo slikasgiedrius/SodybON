@@ -4,6 +4,10 @@ import co.touchlab.kermit.Logger
 import dev.gitlive.firebase.firestore.FirestoreExceptionCode
 
 object Login {
+    fun Logger.logLoginWithGoogleClicked() {
+        Logger.i { "Login with Google clicked" }
+    }
+
     fun Logger.logLoginWithGoogleSuccessful() {
         Logger.i { "Login with Google successful" }
     }
@@ -23,16 +27,23 @@ object Property {
     fun Logger.logSuccessfulRetrievalOfProperties() {
         Logger.i { "List of properties retrieved successfully" }
     }
+
     fun Logger.logFailedRetrievalOfProperties(exception: FirestoreExceptionCode) {
         Logger.e("List of properties retrieval failed with exception: ${exception.name}")
     }
+
     fun Logger.logListItemClicked(propertyName: String) {
         Logger.i { "List item clicked: $propertyName" }
+    }
+
+    fun Logger.logClickBackFromDetailedPropertyScreen() {
+        Logger.i { "Clicked back from detailed property screen" }
+
     }
 }
 
 object Profile {
     fun Logger.logOnSignOutClicked() {
-        Logger.i { "User clicked on sign out" }
+        Logger.i { "Sign out clicked" }
     }
 }

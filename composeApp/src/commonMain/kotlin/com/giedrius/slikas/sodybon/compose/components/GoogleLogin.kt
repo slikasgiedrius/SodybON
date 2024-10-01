@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.utils.Login.logLoginFailed
+import com.giedrius.slikas.sodybon.utils.Login.logLoginWithGoogleClicked
 import com.giedrius.slikas.sodybon.utils.Login.logLoginWithGoogleSuccessful
 import com.mmk.kmpauth.firebase.google.GoogleButtonUiContainerFirebase
 import com.mmk.kmpauth.uihelper.google.GoogleSignInButton
@@ -34,6 +35,9 @@ fun GoogleLogin(
         GoogleSignInButton(
             modifier = Modifier.fillMaxWidth().height(44.dp),
             fontSize = 19.sp
-        ) { this.onClick() }
+        ) {
+            Logger.logLoginWithGoogleClicked()
+            this.onClick()
+        }
     }
 }

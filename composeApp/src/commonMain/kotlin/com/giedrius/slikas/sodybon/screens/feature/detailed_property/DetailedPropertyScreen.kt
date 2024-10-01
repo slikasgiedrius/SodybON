@@ -8,7 +8,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
+import com.giedrius.slikas.sodybon.utils.Property.logClickBackFromDetailedPropertyScreen
 
 @Composable
 fun DetailedArticle(
@@ -23,7 +25,10 @@ fun DetailedArticle(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(onClick = { onNavigateBack() }) {
+            Button(onClick = {
+                Logger.logClickBackFromDetailedPropertyScreen()
+                onNavigateBack()
+            }) {
                 Text("Go back")
             }
 

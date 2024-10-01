@@ -37,11 +37,11 @@ fun ProfileScreen(
     profileViewModel: ProfileViewModel = koinInject(),
     modifier: Modifier = Modifier,
 ) {
-    val uiState by loginViewModel.uiState.collectAsState()
+    val loginUiState by loginViewModel.uiState.collectAsState()
 
     SodybOnTheme {
         ProfileScreenContent(
-            currentProfile = uiState.currentProfile,
+            currentProfile = loginUiState.currentProfile,
             modifier = modifier,
             onSignOutClicked = { loginViewModel.signOut() },
         )

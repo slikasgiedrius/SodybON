@@ -2,8 +2,10 @@ package com.giedrius.slikas.sodybon.screens.feature.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.data.profile.ProfileRepository
 import com.giedrius.slikas.sodybon.data.profile.model.Profile
+import com.giedrius.slikas.sodybon.utils.Profile.logOnSignOutClicked
 import com.mmk.kmpauth.google.GoogleAuthCredentials
 import com.mmk.kmpauth.google.GoogleAuthProvider
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,11 +47,11 @@ class LoginViewModel(
                     currentProfile = profileRepository.getCurrentProfile(),
                 )
             }
-
         }
     }
 
     fun signOut() = viewModelScope.launch {
+        Logger.logOnSignOutClicked()
         profileRepository.signOut()
         getCurrentProfile()
     }
