@@ -4,6 +4,8 @@ import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.data.property.model.Property
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.firestore.FirebaseFirestoreException
+import dev.gitlive.firebase.firestore.FirestoreExceptionCode
+import dev.gitlive.firebase.firestore.code
 import dev.gitlive.firebase.firestore.firestore
 
 class PropertyRepositoryImpl(
@@ -18,6 +20,12 @@ class PropertyRepositoryImpl(
             }
         } catch (e: FirebaseFirestoreException) {
             Logger.e("Error getting properties ${e.message}")
+            if (e.code == FirestoreExceptionCode.PERMISSION_DENIED) {
+                Logger.e("Firestore permission denied $e")
+                // Show an error message to the user or navigate to a different screen
+            } else {
+                // Handle other Firestore exceptions
+            }
             emptyList()
         }
     }
