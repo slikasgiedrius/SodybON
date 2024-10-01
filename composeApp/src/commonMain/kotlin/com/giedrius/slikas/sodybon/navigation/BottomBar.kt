@@ -1,4 +1,4 @@
-package com.giedrius.slikas.sodybon.compose.navigation
+package com.giedrius.slikas.sodybon.navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

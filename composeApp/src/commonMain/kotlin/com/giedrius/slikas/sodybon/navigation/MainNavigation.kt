@@ -1,4 +1,4 @@
-package com.giedrius.slikas.sodybon.compose.navigation
+package com.giedrius.slikas.sodybon.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -9,9 +9,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
-import com.giedrius.slikas.sodybon.compose.navigation.MainNavigationDirections.Actions.navigateBack
-import com.giedrius.slikas.sodybon.compose.navigation.MainNavigationDirections.Actions.openDetailedProperty
-import com.giedrius.slikas.sodybon.compose.navigation.Navigations.MAIN
+import com.giedrius.slikas.sodybon.navigation.MainNavigationDirections.Actions.navigateBack
+import com.giedrius.slikas.sodybon.navigation.MainNavigationDirections.Actions.openDetailedProperty
+import com.giedrius.slikas.sodybon.navigation.Navigations.MAIN
 import com.giedrius.slikas.sodybon.screens.detailed_property.DetailedArticle
 import com.giedrius.slikas.sodybon.screens.home.HomeScreen
 import com.giedrius.slikas.sodybon.screens.profile.ProfileScreen

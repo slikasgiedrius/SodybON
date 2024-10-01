@@ -1,4 +1,4 @@
-package com.giedrius.slikas.sodybon.compose.navigation
+package com.giedrius.slikas.sodybon.navigation
 
 import androidx.navigation.NavHostController
 

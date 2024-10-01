@@ -26,7 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.compose.components.GoogleLogin
-import com.giedrius.slikas.sodybon.compose.navigation.BottomBarTabs
+import com.giedrius.slikas.sodybon.navigation.BottomBarTabs
 import com.giedrius.slikas.sodybon.data.profile.model.Profile
 import com.giedrius.slikas.sodybon.screens.login.LoginViewModel
 import io.kamel.image.KamelImage
