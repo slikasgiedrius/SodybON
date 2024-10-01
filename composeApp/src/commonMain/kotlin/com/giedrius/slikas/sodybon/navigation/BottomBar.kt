@@ -32,6 +32,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
+import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.base.BOTTOM_INSET_HEIGHT
 import com.giedrius.slikas.sodybon.compose.base.CUSTOM_BOTTOM_BAR_HEIGHT
 import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
@@ -70,7 +71,7 @@ fun BottomBar(
                     label = { Text(BottomBarTabs.Home.name) },
                     selected = BottomBarTabs.Home == selectedScreen,
                     onClick = {
-                        logBottomNavigationItemClicked(BottomBarTabs.Home.name)
+                        Logger.logBottomNavigationItemClicked(BottomBarTabs.Home.name)
                         selectedScreen = BottomBarTabs.Home
                         navigateToTab(
                             navController = navController,
@@ -114,7 +115,7 @@ fun BottomBar(
                     },
                     selected = BottomBarTabs.Profile == selectedScreen,
                     onClick = {
-                        logBottomNavigationItemClicked(BottomBarTabs.Profile.name)
+                        Logger.logBottomNavigationItemClicked(BottomBarTabs.Profile.name)
                         selectedScreen = BottomBarTabs.Profile
                         navigateToTab(
                             navController = navController,

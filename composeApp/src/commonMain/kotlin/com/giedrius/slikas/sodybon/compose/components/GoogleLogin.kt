@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.utils.Login.logLoginFailed
 import com.giedrius.slikas.sodybon.utils.Login.logLoginWithGoogleSuccessful
 import com.mmk.kmpauth.firebase.google.GoogleButtonUiContainerFirebase
@@ -19,9 +20,9 @@ fun GoogleLogin(
 ) {
     val onFirebaseResult: (Result<FirebaseUser?>) -> Unit = { result ->
         if (result.isSuccess) {
-            logLoginWithGoogleSuccessful()
+            Logger.logLoginWithGoogleSuccessful()
         } else {
-            logLoginFailed(errorMessage = result.exceptionOrNull()?.message.toString())
+            Logger.logLoginFailed(errorMessage = result.exceptionOrNull()?.message.toString())
         }
         onUpdateUser.invoke()
     }

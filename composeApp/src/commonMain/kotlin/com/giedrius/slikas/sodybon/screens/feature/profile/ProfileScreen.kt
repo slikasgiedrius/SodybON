@@ -43,7 +43,7 @@ fun ProfileScreen(
         ProfileScreenContent(
             currentProfile = uiState.currentProfile,
             modifier = modifier,
-            onSignOutClicked = { profileViewModel.signOut() },
+            onSignOutClicked = { loginViewModel.signOut() },
         )
     }
 }
