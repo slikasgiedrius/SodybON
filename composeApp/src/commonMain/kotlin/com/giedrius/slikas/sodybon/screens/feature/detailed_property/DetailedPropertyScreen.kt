@@ -1,4 +1,4 @@
-package com.giedrius.slikas.sodybon.screens.detailed_property
+package com.giedrius.slikas.sodybon.screens.feature.detailed_property
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

@@ -1,4 +1,4 @@
-package com.giedrius.slikas.sodybon.screens.login
+package com.giedrius.slikas.sodybon.screens.feature.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -34,11 +34,11 @@ class LoginViewModel(
                     serverId = getString(Res.string.default_web_client_id),
                 )
             )
-            updateUser()
+            getCurrentProfile()
         }
     }
 
-    fun updateUser() {
+    fun getCurrentProfile() {
         viewModelScope.launch {
             _uiState.update {
                 it.copy(
@@ -51,6 +51,6 @@ class LoginViewModel(
 
     fun signOut() = viewModelScope.launch {
         profileRepository.signOut()
-        updateUser()
+        getCurrentProfile()
     }
 }

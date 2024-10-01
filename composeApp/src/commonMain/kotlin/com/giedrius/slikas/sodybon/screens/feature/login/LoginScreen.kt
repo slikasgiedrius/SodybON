@@ -1,4 +1,4 @@
-package com.giedrius.slikas.sodybon.screens.login
+package com.giedrius.slikas.sodybon.screens.feature.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -28,7 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.compose.components.GoogleLogin
@@ -52,7 +50,7 @@ fun LoginScreen(
                 .fillMaxSize()
                 .background(MaterialTheme.colors.background)
                 .windowInsetsPadding(WindowInsets.safeDrawing),
-            onUpdateUserClicked = { loginViewModel.updateUser() },
+            onGoogleLoginClicked = { loginViewModel.getCurrentProfile() },
         )
     }
 }
@@ -62,7 +60,7 @@ fun LoginScreen(
 fun LoginScreenContent(
     currentProfile: Profile?,
     modifier: Modifier = Modifier,
-    onUpdateUserClicked: () -> Unit,
+    onGoogleLoginClicked: () -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -76,7 +74,7 @@ fun LoginScreenContent(
                 if (currentProfile == null) {
                     GoogleLogin(
                         modifier = Modifier.padding(horizontal = 16.dp),
-                        onUpdateUser = { onUpdateUserClicked() },
+                        onUpdateUser = { onGoogleLoginClicked() },
                     )
                 } else {
                     Row {

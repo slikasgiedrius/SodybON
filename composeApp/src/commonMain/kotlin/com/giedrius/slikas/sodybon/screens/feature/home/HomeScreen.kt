@@ -1,4 +1,4 @@
-package com.giedrius.slikas.sodybon.screens.home
+package com.giedrius.slikas.sodybon.screens.feature.home
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding

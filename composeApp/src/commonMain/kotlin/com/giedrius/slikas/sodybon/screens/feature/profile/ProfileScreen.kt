@@ -1,11 +1,10 @@
-package com.giedrius.slikas.sodybon.screens.profile
+package com.giedrius.slikas.sodybon.screens.feature.profile
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
@@ -25,10 +24,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
-import com.giedrius.slikas.sodybon.compose.components.GoogleLogin
 import com.giedrius.slikas.sodybon.navigation.BottomBarTabs
 import com.giedrius.slikas.sodybon.data.profile.model.Profile
-import com.giedrius.slikas.sodybon.screens.login.LoginViewModel
+import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.koin.compose.koinInject
@@ -36,6 +34,7 @@ import org.koin.compose.koinInject
 @Composable
 fun ProfileScreen(
     loginViewModel: LoginViewModel = koinInject(),
+    profileViewModel: ProfileViewModel = koinInject(),
     modifier: Modifier = Modifier,
 ) {
     val uiState by loginViewModel.uiState.collectAsState()
@@ -44,8 +43,7 @@ fun ProfileScreen(
         ProfileScreenContent(
             currentProfile = uiState.currentProfile,
             modifier = modifier,
-            onUpdateUserClicked = { loginViewModel.updateUser() },
-            onSignOutClicked = { loginViewModel.signOut() },
+            onSignOutClicked = { profileViewModel.signOut() },
         )
     }
 }
@@ -54,7 +52,6 @@ fun ProfileScreen(
 fun ProfileScreenContent(
     currentProfile: Profile?,
     modifier: Modifier = Modifier,
-    onUpdateUserClicked: () -> Unit,
     onSignOutClicked: () -> Unit,
 ) {
     Column(
@@ -67,10 +64,7 @@ fun ProfileScreenContent(
         ) {
             Column {
                 if (currentProfile == null) {
-                    GoogleLogin(
-                        modifier = Modifier.padding(horizontal = 16.dp),
-                        onUpdateUser = { onUpdateUserClicked() },
-                    )
+                    //Shouldn't be possible
                 } else {
                     Row {
                         if (currentProfile.photoUrl != null) {

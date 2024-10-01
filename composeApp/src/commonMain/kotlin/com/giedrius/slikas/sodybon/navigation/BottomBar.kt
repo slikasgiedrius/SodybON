@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.giedrius.slikas.sodybon.compose.base.BOTTOM_INSET_HEIGHT
 import com.giedrius.slikas.sodybon.compose.base.CUSTOM_BOTTOM_BAR_HEIGHT
-import com.giedrius.slikas.sodybon.screens.login.LoginViewModel
+import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
 import com.giedrius.slikas.sodybon.utils.Navigation.logBottomNavigationItemClicked
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource

@@ -8,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.giedrius.slikas.sodybon.di.initKoin
+import com.giedrius.slikas.sodybon.screens.App
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.ktx.initialize
 
