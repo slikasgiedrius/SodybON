@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -49,10 +50,15 @@ fun HomeScreen(
                 )
             }
         ) {
-            HomeScreenContent(
-                properties = uiState.properties,
-                onPropertyClicked = onPropertyClicked
-            )
+            if (uiState.getPropertiesException != null) {
+                // Handle error state
+                Text(uiState.getPropertiesException!!.name)
+            } else {
+                HomeScreenContent(
+                    properties = uiState.properties,
+                    onPropertyClicked = onPropertyClicked
+                )
+            }
         }
     }
 }
