@@ -1,11 +1,17 @@
 package com.giedrius.slikas.sodybon.screens.feature.profile
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
@@ -23,9 +29,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.giedrius.slikas.sodybon.compose.base.BOTTOM_INSET_HEIGHT
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
-import com.giedrius.slikas.sodybon.navigation.BottomBarTabs
 import com.giedrius.slikas.sodybon.data.profile.model.Profile
+import com.giedrius.slikas.sodybon.navigation.BottomBarTabs
 import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
@@ -42,7 +49,11 @@ fun ProfileScreen(
     SodybOnTheme {
         ProfileScreenContent(
             currentProfile = loginUiState.currentProfile,
-            modifier = modifier,
+            modifier = modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colors.background)
+                .windowInsetsPadding(WindowInsets.safeDrawing)
+                .padding(bottom = BOTTOM_INSET_HEIGHT),
             onSignOutClicked = { loginViewModel.signOut() },
         )
     }
@@ -55,67 +66,54 @@ fun ProfileScreenContent(
     onSignOutClicked: () -> Unit,
 ) {
     Column(
-        modifier = modifier
+        modifier = modifier,
     ) {
-        // top row
         Row(
-            modifier = Modifier.fillMaxWidth().height(50.dp),
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
         ) {
-            Column {
-                if (currentProfile == null) {
-                    //Shouldn't be possible
-                } else {
-                    Row {
-                        if (currentProfile.photoUrl != null) {
-                            KamelImage(modifier = Modifier.size(48.dp).clip(CircleShape),
-                                resource = asyncPainterResource(currentProfile.photoUrl),
-                                contentDescription = "",
-                                contentScale = ContentScale.Fit,
-                                onLoading = { CircularProgressIndicator(it) },
-                                onFailure = {
-                                    Column {
-                                        Text(
-                                            text = "Failed to load",
-                                            fontWeight = FontWeight.Bold,
-                                        )
-                                    }
-                                })
-                        } else {
-                            Icon(
-                                Icons.Default.AccountCircle,
-                                contentDescription = currentProfile.firstName
-                                    ?: BottomBarTabs.Profile.name,
+            if (currentProfile?.photoUrl != null) {
+                KamelImage(modifier = Modifier.size(48.dp).clip(CircleShape),
+                    resource = asyncPainterResource(currentProfile.photoUrl),
+                    contentDescription = "",
+                    contentScale = ContentScale.Fit,
+                    onLoading = { CircularProgressIndicator(it) },
+                    onFailure = {
+                        Column {
+                            Text(
+                                text = "Failed to load",
+                                fontWeight = FontWeight.Bold,
                             )
                         }
-                        Text(
-                            text = currentProfile.fullName ?: "Not logged in",
-                            style = MaterialTheme.typography.h6,
-                            fontWeight = FontWeight.SemiBold,
-                        )
-                    }
-                }
+                    })
+            } else {
+                Icon(
+                    Icons.Default.AccountCircle,
+                    contentDescription = currentProfile?.firstName
+                        ?: BottomBarTabs.Profile.name,
+                )
             }
+            Text(
+                text = currentProfile?.fullName ?: "Not logged in",
+                style = MaterialTheme.typography.h6,
+                fontWeight = FontWeight.SemiBold,
+            )
 
         }
-
-        // content row
         Row(
-            modifier = Modifier.fillMaxWidth().weight(0.5F),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier.fillMaxSize(),
+            verticalAlignment = Alignment.Bottom,
+            horizontalArrangement = Arrangement.Center
         ) {
-            Text(text = "Some Other Contents")
-        }
-
-        // bottom row
-        Row(
-            modifier = Modifier.fillMaxWidth().height(100.dp),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Button(onClick = { onSignOutClicked() }) {
-                Text("Sign out")
+            Button(
+                onClick = { onSignOutClicked() }
+            ) {
+                Text(
+                    text = "Sign out",
+                    style = MaterialTheme.typography.h6,
+                    fontWeight = FontWeight.SemiBold,
+                )
             }
         }
     }
