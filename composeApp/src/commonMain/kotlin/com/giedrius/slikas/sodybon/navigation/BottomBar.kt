@@ -129,9 +129,6 @@ fun BottomBar(
             MainNavigation(
                 navController = navController,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colors.background)
-                    .windowInsetsPadding(WindowInsets.safeDrawing)
                     .padding(bottom = BOTTOM_INSET_HEIGHT),
             )
         }

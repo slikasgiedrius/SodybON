@@ -1,53 +1,36 @@
 package com.giedrius.slikas.sodybon.screens.feature.profile
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.giedrius.slikas.sodybon.compose.base.BOTTOM_INSET_HEIGHT
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.compose.components.ProfilePicture
 import com.giedrius.slikas.sodybon.data.profile.model.Profile
-import com.giedrius.slikas.sodybon.navigation.BottomBarTabs
 import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
-import io.kamel.image.KamelImage
-import io.kamel.image.asyncPainterResource
 import org.koin.compose.koinInject
 
 @Composable
 fun ProfileScreen(
+    modifier: Modifier = Modifier,
     loginViewModel: LoginViewModel = koinInject(),
     profileViewModel: ProfileViewModel = koinInject(),
-    modifier: Modifier = Modifier,
 ) {
     val loginUiState by loginViewModel.uiState.collectAsState()
 
@@ -55,9 +38,6 @@ fun ProfileScreen(
         ProfileScreenContent(
             currentProfile = loginUiState.currentProfile,
             modifier = modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colors.background)
-                .windowInsetsPadding(WindowInsets.safeDrawing)
                 .padding(bottom = BOTTOM_INSET_HEIGHT),
             onSignOutClicked = { loginViewModel.signOut() },
         )
@@ -92,12 +72,14 @@ fun ProfileScreenContent(
                 Text(
                     text = currentProfile?.firstName ?: "No First Name",
                     style = MaterialTheme.typography.h6,
+                    color = MaterialTheme.colors.onSecondary,
                     fontWeight = FontWeight.Bold,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = currentProfile?.lastName ?: "No Last Name",
                     style = MaterialTheme.typography.h6,
+                    color = MaterialTheme.colors.onSecondary,
                     fontWeight = FontWeight.Bold,
                 )
             }
