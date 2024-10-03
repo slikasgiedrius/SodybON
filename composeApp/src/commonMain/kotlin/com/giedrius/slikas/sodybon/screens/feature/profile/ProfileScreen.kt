@@ -4,14 +4,18 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
@@ -31,6 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.giedrius.slikas.sodybon.compose.base.BOTTOM_INSET_HEIGHT
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
+import com.giedrius.slikas.sodybon.compose.components.ProfilePicture
 import com.giedrius.slikas.sodybon.data.profile.model.Profile
 import com.giedrius.slikas.sodybon.navigation.BottomBarTabs
 import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
@@ -68,45 +73,46 @@ fun ProfileScreenContent(
     Column(
         modifier = modifier,
     ) {
+
+        //User avatar with first and last name
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp, start = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Start
         ) {
-            if (currentProfile?.photoUrl != null) {
-                KamelImage(modifier = Modifier.size(48.dp).clip(CircleShape),
-                    resource = asyncPainterResource(currentProfile.photoUrl),
-                    contentDescription = "",
-                    contentScale = ContentScale.Fit,
-                    onLoading = { CircularProgressIndicator(it) },
-                    onFailure = {
-                        Column {
-                            Text(
-                                text = "Failed to load",
-                                fontWeight = FontWeight.Bold,
-                            )
-                        }
-                    })
-            } else {
-                Icon(
-                    Icons.Default.AccountCircle,
-                    contentDescription = currentProfile?.firstName
-                        ?: BottomBarTabs.Profile.name,
+            ProfilePicture(
+                currentProfile = currentProfile
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Column(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = currentProfile?.firstName ?: "No First Name",
+                    style = MaterialTheme.typography.h6,
+                    fontWeight = FontWeight.Bold,
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = currentProfile?.lastName ?: "No Last Name",
+                    style = MaterialTheme.typography.h6,
+                    fontWeight = FontWeight.Bold,
                 )
             }
-            Text(
-                text = currentProfile?.fullName ?: "Not logged in",
-                style = MaterialTheme.typography.h6,
-                fontWeight = FontWeight.SemiBold,
-            )
-
         }
+
+        //Sign out
         Row(
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.Bottom,
             horizontalArrangement = Arrangement.Center
         ) {
             Button(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
                 onClick = { onSignOutClicked() }
             ) {
                 Text(
