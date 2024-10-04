@@ -1,11 +1,5 @@
 package com.giedrius.slikas.sodybon.navigation
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -20,7 +14,6 @@ import com.giedrius.slikas.sodybon.navigation.Navigations.MAIN
 import com.giedrius.slikas.sodybon.screens.feature.detailed_property.DetailedArticle
 import com.giedrius.slikas.sodybon.screens.feature.home.HomeScreen
 import com.giedrius.slikas.sodybon.screens.feature.profile.ProfileScreen
-import com.giedrius.slikas.sodybon.utils.extensions.topLevelFullScreenBackground
 
 internal object Navigations {
     const val MAIN = "Main"
@@ -41,7 +34,6 @@ fun MainNavigation(
                 route = MainNavigationDirections.Routes.HOME
             ) {
                 HomeScreen(
-                    modifier = Modifier.topLevelFullScreenBackground(MaterialTheme.colors.background),
                     onPropertyClicked = {
                         navController.openDetailedProperty(propertyId = it)
                     }
@@ -57,7 +49,6 @@ fun MainNavigation(
                 )
             ) {
                 DetailedArticle(
-                    modifier = Modifier.topLevelFullScreenBackground(MaterialTheme.colors.error),
                     propertyId = it.arguments?.getString(MainNavigationDirections.DetailedPropertyArgs.PROPERTY_ID),
                     onNavigateBack = {
                         navController.navigateBack()
@@ -65,9 +56,7 @@ fun MainNavigation(
                 )
             }
             composable(MainNavigationDirections.Routes.PROFILE) {
-                ProfileScreen(
-                    modifier = Modifier.topLevelFullScreenBackground(MaterialTheme.colors.secondary)
-                )
+                ProfileScreen()
             }
         }
     }

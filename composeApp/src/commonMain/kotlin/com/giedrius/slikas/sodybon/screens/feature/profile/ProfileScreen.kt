@@ -1,5 +1,6 @@
 package com.giedrius.slikas.sodybon.screens.feature.profile
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,11 +25,12 @@ import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.compose.components.ProfilePicture
 import com.giedrius.slikas.sodybon.data.profile.model.Profile
 import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
+import com.giedrius.slikas.sodybon.utils.extensions.topLevelFullScreenBackground
 import org.koin.compose.koinInject
 
 @Composable
 fun ProfileScreen(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.topLevelFullScreenBackground(MaterialTheme.colors.secondary),
     loginViewModel: LoginViewModel = koinInject(),
     profileViewModel: ProfileViewModel = koinInject(),
 ) {
@@ -58,7 +60,8 @@ fun ProfileScreenContent(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp, start = 16.dp),
+                .background(MaterialTheme.colors.onSecondary)
+                .padding(all = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
         ) {
@@ -72,14 +75,12 @@ fun ProfileScreenContent(
                 Text(
                     text = currentProfile?.firstName ?: "No First Name",
                     style = MaterialTheme.typography.h6,
-                    color = MaterialTheme.colors.onSecondary,
                     fontWeight = FontWeight.Bold,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = currentProfile?.lastName ?: "No Last Name",
                     style = MaterialTheme.typography.h6,
-                    color = MaterialTheme.colors.onSecondary,
                     fontWeight = FontWeight.Bold,
                 )
             }

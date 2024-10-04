@@ -1,11 +1,7 @@
 package com.giedrius.slikas.sodybon.screens.feature.home
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
@@ -21,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.compose.components.PropertyCard
 import com.giedrius.slikas.sodybon.data.property.model.Property
+import com.giedrius.slikas.sodybon.utils.extensions.topLevelFullScreenBackground
 import dev.materii.pullrefresh.PullRefreshIndicator
 import dev.materii.pullrefresh.PullRefreshLayout
 import dev.materii.pullrefresh.rememberPullRefreshState
@@ -31,7 +28,7 @@ import sodybon.composeapp.generated.resources.compose_multiplatform
 
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.topLevelFullScreenBackground(MaterialTheme.colors.background),
     homeViewModel: HomeViewModel = koinInject(),
     onPropertyClicked: (String) -> Unit,
 ) {

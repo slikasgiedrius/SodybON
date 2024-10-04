@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -11,10 +12,11 @@ import androidx.compose.ui.Modifier
 import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.utils.Property.logClickBackFromDetailedPropertyScreen
+import com.giedrius.slikas.sodybon.utils.extensions.topLevelFullScreenBackground
 
 @Composable
 fun DetailedArticle(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.topLevelFullScreenBackground(MaterialTheme.colors.error),
     propertyId: String?,
     onNavigateBack: () -> Unit
 ) {
