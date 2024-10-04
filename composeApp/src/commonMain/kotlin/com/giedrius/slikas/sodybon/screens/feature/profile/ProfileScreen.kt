@@ -20,10 +20,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.giedrius.slikas.sodybon.compose.base.BOTTOM_INSET_HEIGHT
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.compose.components.ProfilePicture
 import com.giedrius.slikas.sodybon.data.profile.model.Profile
+import com.giedrius.slikas.sodybon.getPlatformBottomBarPadding
 import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
 import com.giedrius.slikas.sodybon.utils.extensions.topLevelFullScreenBackground
 import org.koin.compose.koinInject
@@ -40,7 +40,7 @@ fun ProfileScreen(
         ProfileScreenContent(
             currentProfile = loginUiState.currentProfile,
             modifier = modifier
-                .padding(bottom = BOTTOM_INSET_HEIGHT),
+                .padding(bottom = getPlatformBottomBarPadding().dp),
             onSignOutClicked = { loginViewModel.signOut() },
         )
     }
