@@ -5,12 +5,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
@@ -51,11 +51,11 @@ fun BottomBar(
     Scaffold(
         modifier = Modifier,
         bottomBar = {
-            BottomNavigation(
+            NavigationBar(
                 modifier = Modifier.height(CUSTOM_BOTTOM_BAR_HEIGHT)
             ) {
                 // Home tab
-                BottomNavigationItem(
+                NavigationBarItem(
                     icon = {
                         Icon(
                             Icons.Default.Home,
@@ -75,7 +75,7 @@ fun BottomBar(
                 )
 
                 // Profile tab
-                BottomNavigationItem(
+                NavigationBarItem(
                     icon = {
                         if (uiState.currentProfile?.photoUrl != null) {
                             KamelImage(

@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -29,7 +29,7 @@ import org.koin.compose.koinInject
 
 @Composable
 fun ProfileScreen(
-    modifier: Modifier = Modifier.topLevelFullScreenBackground(MaterialTheme.colors.secondary),
+    modifier: Modifier = Modifier.topLevelFullScreenBackground(MaterialTheme.colorScheme.secondary),
     loginViewModel: LoginViewModel = koinInject(),
     profileViewModel: ProfileViewModel = koinInject(),
 ) {
@@ -58,7 +58,7 @@ fun ProfileScreenContent(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colors.onSecondary)
+                .background(MaterialTheme.colorScheme.onSecondary)
                 .padding(all = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
@@ -72,13 +72,13 @@ fun ProfileScreenContent(
             ) {
                 Text(
                     text = currentProfile?.firstName ?: "No First Name",
-                    style = MaterialTheme.typography.h6,
+                    style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = currentProfile?.lastName ?: "No Last Name",
-                    style = MaterialTheme.typography.h6,
+                    style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                 )
             }
@@ -98,7 +98,7 @@ fun ProfileScreenContent(
             ) {
                 Text(
                     text = "Sign out",
-                    style = MaterialTheme.typography.h6,
+                    style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.SemiBold,
                 )
             }

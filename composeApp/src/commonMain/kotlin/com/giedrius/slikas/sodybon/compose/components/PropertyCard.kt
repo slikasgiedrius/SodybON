@@ -4,11 +4,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,7 +23,6 @@ import com.giedrius.slikas.sodybon.utils.Property.logListItemClicked
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PropertyCard(
     property: Property,
@@ -32,9 +31,10 @@ fun PropertyCard(
 ) {
     Card(
         modifier = Modifier.padding(bottom = 20.dp),
-        backgroundColor = MaterialTheme.colors.background,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.background,
+        ),
         shape = MaterialTheme.shapes.medium,
-        elevation = 0.dp,
         onClick = {
             onPropertyClicked(property.id)
             Logger.logListItemClicked(property.name)
@@ -67,7 +67,7 @@ fun PropertyCard(
             Text(
                 modifier = Modifier.padding(top = 8.dp),
                 text = property.name,
-                style = MaterialTheme.typography.h6,
+                style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.SemiBold,
             )
             Text(
@@ -76,7 +76,7 @@ fun PropertyCard(
                     bottom = 4.dp,
                 ),
                 text = property.address.getShortAddress(),
-                style = MaterialTheme.typography.subtitle1,
+                style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Normal,
             )
         }

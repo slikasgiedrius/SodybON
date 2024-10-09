@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -28,7 +28,7 @@ import sodybon.composeapp.generated.resources.compose_multiplatform
 
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier.topLevelFullScreenBackground(MaterialTheme.colors.background),
+    modifier: Modifier = Modifier.topLevelFullScreenBackground(MaterialTheme.colorScheme.background),
     homeViewModel: HomeViewModel = koinInject(),
     onPropertyClicked: (String) -> Unit,
 ) {
@@ -49,7 +49,7 @@ fun HomeScreen(
             indicator = {
                 PullRefreshIndicator(
                     state = pullRefreshState,
-                    contentColor = MaterialTheme.colors.primary
+                    contentColor = MaterialTheme.colorScheme.primary
                 )
             }
         ) {
