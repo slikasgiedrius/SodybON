@@ -5,15 +5,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,12 +27,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import co.touchlab.kermit.Logger
-import com.giedrius.slikas.sodybon.compose.base.CUSTOM_BOTTOM_BAR_HEIGHT
 import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
 import com.giedrius.slikas.sodybon.utils.Navigation.logBottomNavigationItemClicked
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.koin.compose.koinInject
+
+private val BOTTOM_NAV_ICON_SIZE = 30.dp
+private val CUSTOM_BOTTOM_BAR_HEIGHT = 88.dp
 
 enum class BottomBarTabs {
     Home,
@@ -58,7 +60,8 @@ fun BottomBar(
                 NavigationBarItem(
                     icon = {
                         Icon(
-                            Icons.Default.Home,
+                            modifier = Modifier.size(BOTTOM_NAV_ICON_SIZE),
+                            imageVector = Icons.Default.Home,
                             contentDescription = BottomBarTabs.Home.name
                         )
                     },
@@ -80,7 +83,7 @@ fun BottomBar(
                         if (uiState.currentProfile?.photoUrl != null) {
                             KamelImage(
                                 modifier = Modifier
-                                    .size(30.dp)
+                                    .size(BOTTOM_NAV_ICON_SIZE)
                                     .clip(CircleShape),
                                 resource = asyncPainterResource(uiState.currentProfile?.photoUrl!!),
                                 contentDescription = "",
@@ -96,7 +99,8 @@ fun BottomBar(
                                 })
                         } else {
                             Icon(
-                                Icons.Default.AccountCircle,
+                                modifier = Modifier.size(BOTTOM_NAV_ICON_SIZE),
+                                imageVector = Icons.Default.AccountCircle,
                                 contentDescription = uiState.currentProfile?.firstName
                                     ?: BottomBarTabs.Profile.name,
                             )
