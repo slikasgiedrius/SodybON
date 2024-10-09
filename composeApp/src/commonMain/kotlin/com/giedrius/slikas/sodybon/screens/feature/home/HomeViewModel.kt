@@ -50,7 +50,7 @@ class HomeViewModel(
                         Logger.logSuccessfulRetrievalOfProperties()
                         currentState.copy(
                             isPropertiesLoading = false, // Hide loading indicator
-                            properties = result.properties // Update properties
+                            properties = result.properties + result.properties// Update properties
                         )
                     }
                 }

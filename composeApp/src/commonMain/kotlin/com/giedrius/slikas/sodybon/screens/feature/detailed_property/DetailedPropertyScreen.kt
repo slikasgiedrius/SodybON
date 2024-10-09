@@ -16,7 +16,7 @@ import com.giedrius.slikas.sodybon.utils.extensions.topLevelFullScreenBackground
 
 @Composable
 fun DetailedArticle(
-    modifier: Modifier = Modifier.topLevelFullScreenBackground(MaterialTheme.colorScheme.error),
+    modifier: Modifier = Modifier,
     propertyId: String?,
     onNavigateBack: () -> Unit,
     onNavigateToProfile: () -> Unit,
@@ -24,7 +24,8 @@ fun DetailedArticle(
 
     SodybOnTheme {
         Column(
-            modifier = modifier.fillMaxSize(),
+            modifier = modifier
+                .topLevelFullScreenBackground(MaterialTheme.colorScheme.error),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

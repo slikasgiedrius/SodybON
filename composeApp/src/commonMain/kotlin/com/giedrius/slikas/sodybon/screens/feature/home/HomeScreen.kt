@@ -29,7 +29,7 @@ import sodybon.composeapp.generated.resources.compose_multiplatform
 
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier.topLevelFullScreenBackground(MaterialTheme.colorScheme.background),
+    modifier: Modifier = Modifier,
     homeViewModel: HomeViewModel = koinInject(),
     onPropertyClicked: (String) -> Unit,
 ) {
@@ -45,7 +45,7 @@ fun HomeScreen(
 
     SodybOnTheme {
         PullRefreshLayout(
-            modifier = modifier,
+            modifier = modifier.topLevelFullScreenBackground(MaterialTheme.colorScheme.background),
             state = pullRefreshState,
             indicator = {
                 PullRefreshIndicator(
@@ -83,7 +83,7 @@ fun HomeScreenContent(
                 PropertyCard(
                     property = property,
                     logoNotLoadedPlaceholder = logoNotLoadedPlaceholder,
-                    modifier = Modifier.padding(bottom = if (index == properties.size - 1) 8.dp else 28.dp), //Set smaller padding if it's last item in the list
+                    modifier = Modifier.padding(bottom = if (index == properties.size - 1) 8.dp else 28.dp), //Set smaller padding if last item in the list
                     onPropertyClicked = onPropertyClicked
                 )
             }

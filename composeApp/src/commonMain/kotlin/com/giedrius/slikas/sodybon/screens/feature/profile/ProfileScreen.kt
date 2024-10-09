@@ -10,8 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -29,7 +29,7 @@ import org.koin.compose.koinInject
 
 @Composable
 fun ProfileScreen(
-    modifier: Modifier = Modifier.topLevelFullScreenBackground(MaterialTheme.colorScheme.secondary),
+    modifier: Modifier = Modifier,
     loginViewModel: LoginViewModel = koinInject(),
     profileViewModel: ProfileViewModel = koinInject(),
 ) {
@@ -38,7 +38,8 @@ fun ProfileScreen(
     SodybOnTheme {
         ProfileScreenContent(
             currentProfile = loginUiState.currentProfile,
-            modifier = modifier,
+            modifier = modifier
+                .topLevelFullScreenBackground(MaterialTheme.colorScheme.background),
             onSignOutClicked = { loginViewModel.signOut() },
         )
     }
@@ -58,7 +59,7 @@ fun ProfileScreenContent(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.onSecondary)
+                .background(MaterialTheme.colorScheme.secondaryContainer)
                 .padding(all = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
@@ -74,23 +75,27 @@ fun ProfileScreenContent(
                     text = currentProfile?.firstName ?: "No First Name",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = currentProfile?.lastName ?: "No Last Name",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
                 )
             }
         }
 
         //Sign out
         Row(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = 4.dp),
             verticalAlignment = Alignment.Bottom,
             horizontalArrangement = Arrangement.Center
         ) {
-            Button(
+            OutlinedButton(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),

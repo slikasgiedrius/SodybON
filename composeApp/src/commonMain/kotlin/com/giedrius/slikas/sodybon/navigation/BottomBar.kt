@@ -8,8 +8,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -22,6 +26,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -41,6 +47,7 @@ enum class BottomBarTabs {
     Profile,
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomBar(
     loginViewModel: LoginViewModel = koinInject(),
@@ -51,9 +58,9 @@ fun BottomBar(
     var selectedScreen by remember { mutableStateOf(BottomBarTabs.Home) }
 
     Scaffold(
-        modifier = Modifier,
         bottomBar = {
-            NavigationBar(
+            BottomAppBar(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
                 modifier = Modifier.height(CUSTOM_BOTTOM_BAR_HEIGHT)
             ) {
                 // Home tab
@@ -65,7 +72,11 @@ fun BottomBar(
                             contentDescription = BottomBarTabs.Home.name
                         )
                     },
-                    label = { Text(BottomBarTabs.Home.name) },
+                    label = {
+                        BottomBarItemText(
+                            text = BottomBarTabs.Home.name
+                        )
+                    },
                     selected = BottomBarTabs.Home == selectedScreen,
                     onClick = {
                         Logger.logBottomNavigationItemClicked(BottomBarTabs.Home.name)
@@ -107,7 +118,7 @@ fun BottomBar(
                         }
                     },
                     label = {
-                        Text(
+                        BottomBarItemText(
                             text = uiState.currentProfile?.firstName ?: BottomBarTabs.Profile.name
                         )
                     },
@@ -129,5 +140,16 @@ fun BottomBar(
                 navController = navController,
             )
         }
+    )
+}
+
+@Composable
+fun BottomBarItemText(
+    text: String,
+    textColor: Color = MaterialTheme.colorScheme.onPrimaryContainer
+) {
+    Text(
+        text = text,
+        color = textColor
     )
 }
