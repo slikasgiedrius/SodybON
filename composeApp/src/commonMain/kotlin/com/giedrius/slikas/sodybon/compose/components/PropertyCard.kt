@@ -27,20 +27,26 @@ import io.kamel.image.asyncPainterResource
 fun PropertyCard(
     property: Property,
     logoNotLoadedPlaceholder: Painter,
+    modifier: Modifier = Modifier,
     onPropertyClicked: (String) -> Unit,
 ) {
-    Card(
-        modifier = Modifier.padding(bottom = 20.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.background,
-        ),
-        shape = MaterialTheme.shapes.medium,
-        onClick = {
-            onPropertyClicked(property.id)
-            Logger.logListItemClicked(property.name)
-        }
+    Column(
+        modifier = modifier
     ) {
-        Column {
+        Card(
+            modifier = Modifier,
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.background,
+            ),
+            shape = MaterialTheme.shapes.medium,
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 8.dp
+            ),
+            onClick = {
+                onPropertyClicked(property.id)
+                Logger.logListItemClicked(property.name)
+            }
+        ) {
             if (property.imageUrl.isNullOrEmpty()) {
                 Image(
                     painter = logoNotLoadedPlaceholder,
@@ -64,19 +70,18 @@ fun PropertyCard(
                         }
                     })
             }
+        }
+
+        Column {
             Text(
                 modifier = Modifier.padding(top = 8.dp),
                 text = property.name,
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.SemiBold,
             )
             Text(
-                modifier = Modifier.padding(
-                    top = 4.dp,
-                    bottom = 4.dp,
-                ),
                 text = property.address.getShortAddress(),
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.Normal,
             )
         }
