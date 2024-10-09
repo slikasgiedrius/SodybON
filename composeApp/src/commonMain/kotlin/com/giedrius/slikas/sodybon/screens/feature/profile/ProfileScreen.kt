@@ -38,8 +38,7 @@ fun ProfileScreen(
     SodybOnTheme {
         ProfileScreenContent(
             currentProfile = loginUiState.currentProfile,
-            modifier = modifier
-                .padding(bottom = 0.dp),
+            modifier = modifier,
             onSignOutClicked = { loginViewModel.signOut() },
         )
     }
@@ -52,7 +51,7 @@ fun ProfileScreenContent(
     onSignOutClicked: () -> Unit,
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier
     ) {
 
         //User avatar with first and last name

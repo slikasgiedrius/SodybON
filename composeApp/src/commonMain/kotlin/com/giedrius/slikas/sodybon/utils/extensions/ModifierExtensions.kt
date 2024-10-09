@@ -2,8 +2,8 @@ package com.giedrius.slikas.sodybon.utils.extensions
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -13,5 +13,5 @@ fun Modifier.topLevelFullScreenBackground(backgroundColor: Color): Modifier = co
     this
         .fillMaxSize()
         .background(backgroundColor)
-        .windowInsetsPadding(WindowInsets.safeDrawing)
+        .windowInsetsPadding(WindowInsets.displayCutout) //Creates top app bar
 }

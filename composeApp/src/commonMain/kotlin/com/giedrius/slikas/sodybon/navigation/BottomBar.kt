@@ -27,7 +27,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import co.touchlab.kermit.Logger
-import com.giedrius.slikas.sodybon.compose.base.BOTTOM_INSET_HEIGHT
 import com.giedrius.slikas.sodybon.compose.base.CUSTOM_BOTTOM_BAR_HEIGHT
 import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
 import com.giedrius.slikas.sodybon.utils.Navigation.logBottomNavigationItemClicked
@@ -50,9 +49,10 @@ fun BottomBar(
     var selectedScreen by remember { mutableStateOf(BottomBarTabs.Home) }
 
     Scaffold(
+        modifier = Modifier,
         bottomBar = {
             BottomNavigation(
-                modifier = Modifier.height(CUSTOM_BOTTOM_BAR_HEIGHT),
+                modifier = Modifier.height(CUSTOM_BOTTOM_BAR_HEIGHT)
             ) {
                 // Home tab
                 BottomNavigationItem(
@@ -119,11 +119,10 @@ fun BottomBar(
                 )
             }
         },
-        content = {
+        content = { innerPadding ->
             MainNavigation(
+                modifier = Modifier.padding(bottom = innerPadding.calculateBottomPadding()),
                 navController = navController,
-                modifier = Modifier
-                    .padding(bottom = BOTTOM_INSET_HEIGHT),
             )
         }
     )

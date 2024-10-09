@@ -10,6 +10,7 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.giedrius.slikas.sodybon.navigation.MainNavigationDirections.Actions.navigateBack
 import com.giedrius.slikas.sodybon.navigation.MainNavigationDirections.Actions.openDetailedProperty
+import com.giedrius.slikas.sodybon.navigation.MainNavigationDirections.Actions.openProfile
 import com.giedrius.slikas.sodybon.navigation.Navigations.MAIN
 import com.giedrius.slikas.sodybon.screens.feature.detailed_property.DetailedArticle
 import com.giedrius.slikas.sodybon.screens.feature.home.HomeScreen
@@ -52,6 +53,9 @@ fun MainNavigation(
                     propertyId = it.arguments?.getString(MainNavigationDirections.DetailedPropertyArgs.PROPERTY_ID),
                     onNavigateBack = {
                         navController.navigateBack()
+                    },
+                    onNavigateToProfile = {
+                        navController.openProfile()
                     }
                 )
             }

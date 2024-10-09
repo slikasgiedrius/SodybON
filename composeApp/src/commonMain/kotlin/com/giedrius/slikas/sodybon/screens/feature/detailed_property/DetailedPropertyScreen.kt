@@ -18,7 +18,8 @@ import com.giedrius.slikas.sodybon.utils.extensions.topLevelFullScreenBackground
 fun DetailedArticle(
     modifier: Modifier = Modifier.topLevelFullScreenBackground(MaterialTheme.colors.error),
     propertyId: String?,
-    onNavigateBack: () -> Unit
+    onNavigateBack: () -> Unit,
+    onNavigateToProfile: () -> Unit,
 ) {
 
     SodybOnTheme {
@@ -32,6 +33,12 @@ fun DetailedArticle(
                 onNavigateBack()
             }) {
                 Text("Go back")
+            }
+
+            Button(onClick = {
+                onNavigateToProfile()
+            }) {
+                Text("Go to profile")
             }
 
             if (!propertyId.isNullOrEmpty()) {
