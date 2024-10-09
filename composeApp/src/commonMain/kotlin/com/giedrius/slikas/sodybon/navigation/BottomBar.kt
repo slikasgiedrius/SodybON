@@ -1,20 +1,14 @@
 package com.giedrius.slikas.sodybon.navigation
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -34,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.base.BOTTOM_INSET_HEIGHT
+import com.giedrius.slikas.sodybon.compose.base.CUSTOM_BOTTOM_BAR_HEIGHT
 import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
 import com.giedrius.slikas.sodybon.utils.Navigation.logBottomNavigationItemClicked
 import io.kamel.image.KamelImage
@@ -52,50 +47,13 @@ fun BottomBar(
     val uiState by loginViewModel.uiState.collectAsState()
 
     val navController = rememberNavController()
-    var selectedTabItem by remember { mutableStateOf(BottomBarTabs.Home) }
-
-    when (selectedTabItem) {
-        BottomBarTabs.Home -> Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.SpaceAround
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .background(MaterialTheme.colors.background)
-            )
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .background(MaterialTheme.colors.primary)
-            )
-        }
-
-        BottomBarTabs.Profile -> Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.SpaceAround
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .background(MaterialTheme.colors.secondary)
-            )
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .background(MaterialTheme.colors.primary)
-            )
-        }
-    }
+    var selectedScreen by remember { mutableStateOf(BottomBarTabs.Home) }
 
     Scaffold(
-        modifier = Modifier.systemBarsPadding(),
         bottomBar = {
-            BottomNavigation {
+            BottomNavigation(
+                modifier = Modifier.height(CUSTOM_BOTTOM_BAR_HEIGHT),
+            ) {
                 // Home tab
                 BottomNavigationItem(
                     icon = {
@@ -105,10 +63,10 @@ fun BottomBar(
                         )
                     },
                     label = { Text(BottomBarTabs.Home.name) },
-                    selected = BottomBarTabs.Home == selectedTabItem,
+                    selected = BottomBarTabs.Home == selectedScreen,
                     onClick = {
                         Logger.logBottomNavigationItemClicked(BottomBarTabs.Home.name)
-                        selectedTabItem = BottomBarTabs.Home
+                        selectedScreen = BottomBarTabs.Home
                         navigateToTab(
                             navController = navController,
                             tab = BottomBarTabs.Home
@@ -149,10 +107,10 @@ fun BottomBar(
                             text = uiState.currentProfile?.firstName ?: BottomBarTabs.Profile.name
                         )
                     },
-                    selected = BottomBarTabs.Profile == selectedTabItem,
+                    selected = BottomBarTabs.Profile == selectedScreen,
                     onClick = {
                         Logger.logBottomNavigationItemClicked(BottomBarTabs.Profile.name)
-                        selectedTabItem = BottomBarTabs.Profile
+                        selectedScreen = BottomBarTabs.Profile
                         navigateToTab(
                             navController = navController,
                             tab = BottomBarTabs.Profile

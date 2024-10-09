@@ -7,3 +7,5 @@ class AndroidPlatform : Platform {
 }
 
 actual fun getPlatform(): Platform = AndroidPlatform()
+
+actual fun getPlatformBottomBarPadding(): Int = 32 //BOTTOM_INSET_HEIGHT

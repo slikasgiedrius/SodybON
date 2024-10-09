@@ -13,5 +13,5 @@ fun Modifier.topLevelFullScreenBackground(backgroundColor: Color): Modifier = co
     this
         .fillMaxSize()
         .background(backgroundColor)
-//        .windowInsetsPadding(WindowInsets.safeDrawing)
+        .windowInsetsPadding(WindowInsets.safeDrawing)
 }
