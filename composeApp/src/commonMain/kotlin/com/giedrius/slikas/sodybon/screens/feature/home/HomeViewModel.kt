@@ -39,8 +39,8 @@ class HomeViewModel(
         viewModelScope.launch {
             _uiState.update { currentState ->
                 currentState.copy(
-                    isPropertiesLoading = true, // Show loading indicator
-                    properties = emptyList() // Clear existing properties
+                    isPropertiesLoading = true,
+                    properties = emptyList()
                 )
             }
 
@@ -49,8 +49,8 @@ class HomeViewModel(
                     _uiState.update { currentState ->
                         Logger.logSuccessfulRetrievalOfProperties()
                         currentState.copy(
-                            isPropertiesLoading = false, // Hide loading indicator
-                            properties = result.properties + result.properties// Update properties
+                            isPropertiesLoading = false,
+                            properties = result.properties
                         )
                     }
                 }
@@ -59,8 +59,8 @@ class HomeViewModel(
                     _uiState.update { currentState ->
                         Logger.logFailedRetrievalOfProperties(exception = result.exception)
                         currentState.copy(
-                            isPropertiesLoading = false, // Hide loading indicator
-                            getPropertiesException = result.exception // Show error message
+                            isPropertiesLoading = false,
+                            getPropertiesException = result.exception
                         )
                     }
                 }
