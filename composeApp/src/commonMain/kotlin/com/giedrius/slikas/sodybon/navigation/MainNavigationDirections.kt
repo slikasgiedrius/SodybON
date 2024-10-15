@@ -5,8 +5,7 @@ import androidx.navigation.NavHostController
 internal object MainNavigationDirections {
     object Routes {
         const val HOME = Screens.HOME
-        const val DETAILED_PROPERTY =
-            "${Screens.DETAILED_PROPERTY}/{${DetailedPropertyArgs.PROPERTY_ID}}"
+        const val DETAILED_PROPERTY = "${Screens.DETAILED_PROPERTY}/{${DetailedPropertyArgs.PROPERTY_ID}}"
         const val PROFILE = Screens.PROFILE
     }
 
@@ -24,7 +23,6 @@ internal object MainNavigationDirections {
         fun NavHostController.openDetailedProperty(propertyId: String) {
             this.navigate("${Screens.DETAILED_PROPERTY}/$propertyId")
         }
-
         fun NavHostController.openHome() = this.navigate(Routes.HOME)
         fun NavHostController.openProfile() = this.navigate(Routes.PROFILE)
         fun NavHostController.navigateBack() = this.popBackStack()
