@@ -38,7 +38,7 @@ import io.kamel.image.asyncPainterResource
 import org.koin.compose.koinInject
 
 private val BOTTOM_NAV_ICON_SIZE = 30.dp
-val CUSTOM_BOTTOM_BAR_HEIGHT = 88.dp
+internal val CUSTOM_BOTTOM_BAR_HEIGHT = 88.dp
 
 enum class BottomBarTabs {
     Home,
@@ -46,7 +46,7 @@ enum class BottomBarTabs {
 }
 
 @Composable
-fun BottomBar(
+fun MainScreen(
     loginViewModel: LoginViewModel = koinInject(),
 ) {
     val uiState by loginViewModel.uiState.collectAsState()

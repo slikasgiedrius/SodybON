@@ -24,7 +24,6 @@ internal object MainNavigationDirections {
         fun NavHostController.openDetailedProperty(propertyId: String) {
             this.navigate("${Screens.DETAILED_PROPERTY}/$propertyId")
         }
-
         fun NavHostController.navigateBack() = this.popBackStack()
     }
 }
