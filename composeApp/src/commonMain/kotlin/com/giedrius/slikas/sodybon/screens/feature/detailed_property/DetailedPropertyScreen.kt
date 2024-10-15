@@ -2,7 +2,6 @@ package com.giedrius.slikas.sodybon.screens.feature.detailed_property
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -19,7 +18,6 @@ fun DetailedArticle(
     modifier: Modifier = Modifier,
     propertyId: String?,
     onNavigateBack: () -> Unit,
-    onNavigateToProfile: () -> Unit,
 ) {
 
     SodybOnTheme {
@@ -34,12 +32,6 @@ fun DetailedArticle(
                 onNavigateBack()
             }) {
                 Text("Go back")
-            }
-
-            Button(onClick = {
-                onNavigateToProfile()
-            }) {
-                Text("Go to profile")
             }
 
             if (!propertyId.isNullOrEmpty()) {
