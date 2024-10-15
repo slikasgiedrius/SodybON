@@ -38,7 +38,14 @@ object Property {
 
     fun Logger.logClickBackFromDetailedPropertyScreen() {
         Logger.i { "Clicked back from detailed property screen" }
+    }
 
+    fun Logger.logClickOnReserveButton(propertyName: String) {
+        Logger.i { "Clicked reserve button for property: $propertyName" }
+    }
+
+    fun Logger.logUnableToIdentifyPropertyWhenClickingReserve() {
+        Logger.i { "Unable to identify property when clicking reserve" }
     }
 }
 

@@ -33,6 +33,8 @@ import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.components.ReserveButton
 import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
 import com.giedrius.slikas.sodybon.utils.Navigation.logBottomNavigationItemClicked
+import com.giedrius.slikas.sodybon.utils.Property.logClickOnReserveButton
+import com.giedrius.slikas.sodybon.utils.Property.logUnableToIdentifyPropertyWhenClickingReserve
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.koin.compose.koinInject
@@ -139,7 +141,20 @@ fun MainScreen(
                 }
 
                 MainNavigationDirections.Routes.DETAILED_PROPERTY -> {
-                    ReserveButton()
+                    ReserveButton(
+                        onReserveButtonClicked = {
+                            val propertyName: String? = navBackStackEntry?.arguments?.getString(
+                                MainNavigationDirections.DetailedPropertyArgs.PROPERTY_ID
+                            )
+                            if (!propertyName.isNullOrEmpty()) {
+                                Logger.logClickOnReserveButton(
+                                    propertyName = propertyName
+                                )
+                            } else {
+                                Logger.logUnableToIdentifyPropertyWhenClickingReserve()
+                            }
+                        }
+                    )
                 }
 
                 else -> {
