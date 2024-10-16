@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -37,7 +36,11 @@ import com.giedrius.slikas.sodybon.utils.Property.logClickOnReserveButton
 import com.giedrius.slikas.sodybon.utils.Property.logUnableToIdentifyPropertyWhenClickingReserve
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
+import org.jetbrains.compose.resources.vectorResource
 import org.koin.compose.koinInject
+import sodybon.composeapp.generated.resources.Res
+import sodybon.composeapp.generated.resources.door
+import sodybon.composeapp.generated.resources.door_filled
 
 private val BOTTOM_NAV_ICON_SIZE = 30.dp
 internal val CUSTOM_BOTTOM_BAR_HEIGHT = 88.dp
@@ -70,11 +73,21 @@ fun MainScreen(
                         // Home tab
                         NavigationBarItem(
                             icon = {
-                                Icon(
-                                    modifier = Modifier.size(BOTTOM_NAV_ICON_SIZE),
-                                    imageVector = Icons.Default.Home,
-                                    contentDescription = BottomBarTabs.Home.name
-                                )
+                                if (selectedScreen == BottomBarTabs.Home) {
+                                    Icon(
+                                        modifier = Modifier.size(BOTTOM_NAV_ICON_SIZE),
+                                        imageVector = vectorResource(Res.drawable.door_filled),
+                                        contentDescription = BottomBarTabs.Home.name,
+                                    )
+                                } else {
+                                    Icon(
+                                        modifier = Modifier.size(BOTTOM_NAV_ICON_SIZE),
+                                        imageVector = vectorResource(Res.drawable.door),
+                                        contentDescription = BottomBarTabs.Home.name,
+                                        tint = MaterialTheme.colorScheme.onPrimaryContainer
+                                    )
+                                }
+
                             },
                             label = {
                                 BottomBarItemText(
