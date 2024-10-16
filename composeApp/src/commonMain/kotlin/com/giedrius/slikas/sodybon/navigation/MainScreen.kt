@@ -43,7 +43,7 @@ import sodybon.composeapp.generated.resources.door
 import sodybon.composeapp.generated.resources.door_filled
 
 private val BOTTOM_NAV_ICON_SIZE = 30.dp
-internal val CUSTOM_BOTTOM_BAR_HEIGHT = 88.dp
+internal val CUSTOM_BOTTOM_BAR_HEIGHT = 100.dp //Increased for an experiment
 
 enum class BottomBarTabs {
     Home,
