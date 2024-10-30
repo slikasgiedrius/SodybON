@@ -1,8 +1,7 @@
 package com.giedrius.slikas.sodybon.navigation
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -32,10 +31,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.components.BottomBarItemText
-import com.giedrius.slikas.sodybon.screens.feature.detailed_property.date_selection.DateSelectionBottomSheet
 import com.giedrius.slikas.sodybon.compose.components.ReserveButton
 import com.giedrius.slikas.sodybon.screens.feature.detailed_property.DetailedPropertyViewModel
-import com.giedrius.slikas.sodybon.screens.feature.detailed_property.date_selection.DatePicker
 import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
 import com.giedrius.slikas.sodybon.utils.Navigation.logBottomNavigationItemClicked
 import io.kamel.image.KamelImage
@@ -47,6 +44,7 @@ import sodybon.composeapp.generated.resources.door
 import sodybon.composeapp.generated.resources.door_filled
 
 private val BOTTOM_NAV_ICON_SIZE = 30.dp
+private const val HOME_ICON_CROSSFADE_DURATION = 300
 internal val CUSTOM_BOTTOM_BAR_HEIGHT = 100.dp //Increased for an experiment
 
 enum class BottomBarTabs {
@@ -60,7 +58,6 @@ fun MainScreen(
     detailedPropertyViewModel: DetailedPropertyViewModel = koinInject(),
 ) {
     val loginUiState by loginViewModel.uiState.collectAsState()
-    val detailedPropertyUiState by detailedPropertyViewModel.uiState.collectAsState()
 
     val navController = rememberNavController()
     var selectedScreen by remember { mutableStateOf(BottomBarTabs.Home) }
@@ -79,28 +76,24 @@ fun MainScreen(
                         // Home tab
                         NavigationBarItem(
                             icon = {
-                                AnimatedVisibility(
-                                    visible = selectedScreen == BottomBarTabs.Home,
-                                    enter = fadeIn(),
-                                    exit = fadeOut()
-                                ) {
-                                    Icon(
-                                        modifier = Modifier.size(BOTTOM_NAV_ICON_SIZE),
-                                        imageVector = vectorResource(Res.drawable.door_filled),
-                                        contentDescription = BottomBarTabs.Home.name,
-                                    )
-                                }
-                                AnimatedVisibility(
-                                    visible = selectedScreen != BottomBarTabs.Home,
-                                    enter = fadeIn(),
-                                    exit = fadeOut()
-                                ) {
-                                    Icon(
-                                        modifier = Modifier.size(BOTTOM_NAV_ICON_SIZE),
-                                        imageVector = vectorResource(Res.drawable.door),
-                                        contentDescription = BottomBarTabs.Home.name,
-                                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                                    )
+                                Crossfade(
+                                    targetState = selectedScreen == BottomBarTabs.Home,
+                                    animationSpec = tween(durationMillis = HOME_ICON_CROSSFADE_DURATION)
+                                ) { isHomeSelected ->
+                                    if (isHomeSelected) {
+                                        Icon(
+                                            modifier = Modifier.size(BOTTOM_NAV_ICON_SIZE),
+                                            imageVector = vectorResource(Res.drawable.door_filled),
+                                            contentDescription = BottomBarTabs.Home.name,
+                                        )
+                                    } else {
+                                        Icon(
+                                            modifier = Modifier.size(BOTTOM_NAV_ICON_SIZE),
+                                            imageVector = vectorResource(Res.drawable.door),
+                                            contentDescription = BottomBarTabs.Home.name,
+                                            tint = MaterialTheme.colorScheme.onPrimaryContainer
+                                        )
+                                    }
                                 }
                             },
                             label = {
@@ -177,12 +170,6 @@ fun MainScreen(
                             detailedPropertyViewModel.setShowDatePicker(true)
                         }
                     )
-                    if (detailedPropertyUiState.showDatePicker) {
-                        DatePicker()
-                    }
-                    if (detailedPropertyUiState.showBottomSheet) {
-                        DateSelectionBottomSheet()
-                    }
                 }
             }
         },

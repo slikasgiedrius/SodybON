@@ -46,7 +46,6 @@ fun DatePicker(
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
         ) {
-
             if (detailedPropertyUiState.showDatePicker) {
                 DatePickerDialog(
                     onDismissRequest = {

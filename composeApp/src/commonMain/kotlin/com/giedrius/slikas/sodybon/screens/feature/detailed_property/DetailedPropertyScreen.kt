@@ -12,6 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
+import com.giedrius.slikas.sodybon.screens.feature.detailed_property.date_selection.DatePicker
+import com.giedrius.slikas.sodybon.screens.feature.detailed_property.date_selection.DateSelectionBottomSheet
 import com.giedrius.slikas.sodybon.utils.Property.logClickBackFromDetailedPropertyScreen
 import com.giedrius.slikas.sodybon.utils.extensions.topLevelFullScreenBackground
 import org.koin.compose.koinInject
@@ -24,6 +26,13 @@ fun DetailedArticleScreen(
     onNavigateBack: () -> Unit,
 ) {
     val uiState by detailedPropertyViewModel.uiState.collectAsState()
+
+    if (uiState.showDatePicker) {
+        DatePicker()
+    }
+    if (uiState.showBottomSheet) {
+        DateSelectionBottomSheet()
+    }
 
     SodybOnTheme {
         Column(
