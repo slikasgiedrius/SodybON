@@ -1,5 +1,8 @@
 package com.giedrius.slikas.sodybon.navigation
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -73,21 +76,29 @@ fun MainScreen(
                         // Home tab
                         NavigationBarItem(
                             icon = {
-                                if (selectedScreen == BottomBarTabs.Home) {
+                                AnimatedVisibility(
+                                    visible = selectedScreen == BottomBarTabs.Home,
+                                    enter = fadeIn(),
+                                    exit = fadeOut()
+                                ) {
                                     Icon(
                                         modifier = Modifier.size(BOTTOM_NAV_ICON_SIZE),
                                         imageVector = vectorResource(Res.drawable.door_filled),
                                         contentDescription = BottomBarTabs.Home.name,
                                     )
-                                } else {
+                                }
+                                AnimatedVisibility(
+                                    visible = selectedScreen != BottomBarTabs.Home,
+                                    enter = fadeIn(),
+                                    exit = fadeOut()
+                                ) {
                                     Icon(
                                         modifier = Modifier.size(BOTTOM_NAV_ICON_SIZE),
                                         imageVector = vectorResource(Res.drawable.door),
                                         contentDescription = BottomBarTabs.Home.name,
-                                        tint = MaterialTheme.colorScheme.onPrimaryContainer
+                                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
                                     )
                                 }
-
                             },
                             label = {
                                 BottomBarItemText(
