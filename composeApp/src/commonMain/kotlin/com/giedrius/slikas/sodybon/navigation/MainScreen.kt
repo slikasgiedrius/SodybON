@@ -32,10 +32,10 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.components.BottomBarItemText
-import com.giedrius.slikas.sodybon.compose.components.DateSelection
-import com.giedrius.slikas.sodybon.compose.components.DateSelectionBottomSheet
+import com.giedrius.slikas.sodybon.screens.feature.detailed_property.date_selection.DateSelectionBottomSheet
 import com.giedrius.slikas.sodybon.compose.components.ReserveButton
 import com.giedrius.slikas.sodybon.screens.feature.detailed_property.DetailedPropertyViewModel
+import com.giedrius.slikas.sodybon.screens.feature.detailed_property.date_selection.DatePicker
 import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
 import com.giedrius.slikas.sodybon.utils.Navigation.logBottomNavigationItemClicked
 import io.kamel.image.KamelImage
@@ -178,7 +178,7 @@ fun MainScreen(
                         }
                     )
                     if (detailedPropertyUiState.showDatePicker) {
-                        DateSelection()
+                        DatePicker()
                     }
                     if (detailedPropertyUiState.showBottomSheet) {
                         DateSelectionBottomSheet()

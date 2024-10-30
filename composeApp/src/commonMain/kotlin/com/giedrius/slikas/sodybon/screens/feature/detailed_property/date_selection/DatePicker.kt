@@ -1,4 +1,4 @@
-package com.giedrius.slikas.sodybon.compose.components
+package com.giedrius.slikas.sodybon.screens.feature.detailed_property.date_selection
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -6,7 +6,6 @@ import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DateRangePicker
 import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -18,15 +17,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.giedrius.slikas.sodybon.screens.feature.detailed_property.DetailedPropertyViewModel
 import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DateSelection(
+fun DatePicker(
     detailedPropertyViewModel: DetailedPropertyViewModel = koinInject()
 ) {
     val detailedPropertyUiState by detailedPropertyViewModel.uiState.collectAsState()
