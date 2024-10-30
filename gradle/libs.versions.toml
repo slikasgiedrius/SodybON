@@ -11,7 +11,7 @@ androidx-espresso-core = "3.6.1"
 androidx-lifecycle = "2.8.0"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
-compose-plugin = "1.6.11"
+compose-multiplatform = "1.7.0"
 coreSplashscreen = "1.0.1"
 firebaseCommonKtx = "21.0.0"
 firebaseFirestore = "2.1.0"
@@ -64,7 +64,7 @@ pullrefresh = { module = "dev.materii.pullrefresh:pullrefresh", version.ref = "p
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }
