@@ -14,10 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.navigation.CUSTOM_BOTTOM_BAR_HEIGHT
+import com.giedrius.slikas.sodybon.utils.Property.logClickOnReserveButton
+import com.giedrius.slikas.sodybon.utils.Property.logUnableToIdentifyPropertyWhenClickingReserve
 
 @Composable
 fun ReserveButton(
+    propertyName: String?,
     onReserveButtonClicked: () -> Unit
 ) {
     BottomAppBar(
@@ -27,7 +31,14 @@ fun ReserveButton(
         Box(
             modifier = Modifier
                 .clickable {
-                    onReserveButtonClicked()
+                    if (!propertyName.isNullOrEmpty()) {
+                        onReserveButtonClicked()
+                        Logger.logClickOnReserveButton(
+                            propertyName = propertyName
+                        )
+                    } else {
+                        Logger.logUnableToIdentifyPropertyWhenClickingReserve()
+                    }
                 }
                 .padding(16.dp),
             contentAlignment = Alignment.Center

@@ -66,6 +66,9 @@ kotlin {
 
             //Navigation
             implementation(libs.navigation.compose)
+
+            //Date and time
+            implementation(libs.kotlinx.datetime)
         }
 
         androidMain.dependencies {
