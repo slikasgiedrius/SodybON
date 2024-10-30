@@ -6,19 +6,24 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.utils.Property.logClickBackFromDetailedPropertyScreen
 import com.giedrius.slikas.sodybon.utils.extensions.topLevelFullScreenBackground
+import org.koin.compose.koinInject
 
 @Composable
-fun DetailedArticle(
+fun DetailedArticleScreen(
     modifier: Modifier = Modifier,
     propertyId: String?,
+    detailedPropertyViewModel: DetailedPropertyViewModel = koinInject(),
     onNavigateBack: () -> Unit,
 ) {
+    val uiState by detailedPropertyViewModel.uiState.collectAsState()
 
     SodybOnTheme {
         Column(

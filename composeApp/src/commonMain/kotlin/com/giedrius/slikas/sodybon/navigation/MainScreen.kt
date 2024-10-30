@@ -3,7 +3,6 @@ package com.giedrius.slikas.sodybon.navigation
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -13,45 +12,34 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.DatePickerDialog
-import androidx.compose.material3.DateRangePicker
-import androidx.compose.material3.DisplayMode
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.rememberDateRangePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import co.touchlab.kermit.Logger
+import com.giedrius.slikas.sodybon.compose.components.BottomBarItemText
+import com.giedrius.slikas.sodybon.compose.components.DateSelection
+import com.giedrius.slikas.sodybon.compose.components.DateSelectionBottomSheet
 import com.giedrius.slikas.sodybon.compose.components.ReserveButton
+import com.giedrius.slikas.sodybon.screens.feature.detailed_property.DetailedPropertyViewModel
 import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
 import com.giedrius.slikas.sodybon.utils.Navigation.logBottomNavigationItemClicked
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.vectorResource
 import org.koin.compose.koinInject
 import sodybon.composeapp.generated.resources.Res
@@ -66,14 +54,13 @@ enum class BottomBarTabs {
     Profile,
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
     loginViewModel: LoginViewModel = koinInject(),
+    detailedPropertyViewModel: DetailedPropertyViewModel = koinInject(),
 ) {
-    val uiState by loginViewModel.uiState.collectAsState()
-    var showDatePicker by remember { mutableStateOf(false) }
-    var showBottomSheet by remember { mutableStateOf(false) }
+    val loginUiState by loginViewModel.uiState.collectAsState()
+    val detailedPropertyUiState by detailedPropertyViewModel.uiState.collectAsState()
 
     val navController = rememberNavController()
     var selectedScreen by remember { mutableStateOf(BottomBarTabs.Home) }
@@ -135,12 +122,12 @@ fun MainScreen(
                         // Profile tab
                         NavigationBarItem(
                             icon = {
-                                if (uiState.currentProfile?.photoUrl != null) {
+                                if (loginUiState.currentProfile?.photoUrl != null) {
                                     KamelImage(
                                         modifier = Modifier
                                             .size(BOTTOM_NAV_ICON_SIZE)
                                             .clip(CircleShape),
-                                        resource = asyncPainterResource(uiState.currentProfile?.photoUrl!!),
+                                        resource = asyncPainterResource(loginUiState.currentProfile?.photoUrl!!),
                                         contentDescription = "",
                                         contentScale = ContentScale.Fit,
                                         onLoading = { CircularProgressIndicator(it) },
@@ -156,14 +143,14 @@ fun MainScreen(
                                     Icon(
                                         modifier = Modifier.size(BOTTOM_NAV_ICON_SIZE),
                                         imageVector = Icons.Default.AccountCircle,
-                                        contentDescription = uiState.currentProfile?.firstName
+                                        contentDescription = loginUiState.currentProfile?.firstName
                                             ?: BottomBarTabs.Profile.name,
                                     )
                                 }
                             },
                             label = {
                                 BottomBarItemText(
-                                    text = uiState.currentProfile?.firstName
+                                    text = loginUiState.currentProfile?.firstName
                                         ?: BottomBarTabs.Profile.name
                                 )
                             },
@@ -187,98 +174,15 @@ fun MainScreen(
                     ReserveButton(
                         propertyName = propertyName,
                         onReserveButtonClicked = {
-                            showDatePicker = true
+                            detailedPropertyViewModel.setShowDatePicker(true)
                         }
                     )
-                    val datePickerState = rememberDateRangePickerState(
-                        initialSelectedStartDateMillis = Clock.System.now().toEpochMilliseconds(),
-                        initialDisplayMode = DisplayMode.Picker,
-                        selectableDates = object : SelectableDates {
-                            override fun isSelectableDate(utcTimeMillis: Long): Boolean {
-                                val currentDateMillis = Clock.System.now().toEpochMilliseconds()
-                                return utcTimeMillis >= currentDateMillis - 86400000 // Allow only dates greater than or equal to today
-                            }
-
-                            override fun isSelectableYear(year: Int): Boolean {
-                                return true
-                            }
-                        }
-                    )
-                    if (showDatePicker) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center,
-                            modifier = Modifier
-                        ) {
-
-                            if (showDatePicker) {
-                                DatePickerDialog(
-                                    onDismissRequest = { showDatePicker = false },
-                                    confirmButton = {
-                                        TextButton(
-                                            onClick = {
-                                                showDatePicker = false
-                                                showBottomSheet = true
-                                            },
-                                        ) {
-                                            Text("Ok")
-                                        }
-                                    },
-                                    dismissButton = {
-                                        TextButton(
-                                            onClick = { showDatePicker = false },
-                                        ) {
-                                            Text("Cancel")
-                                        }
-                                    }
-                                ) {
-                                    DateRangePicker(
-                                        state = datePickerState,
-                                    )
-                                }
-                            }
-                        }
+                    if (detailedPropertyUiState.showDatePicker) {
+                        DateSelection()
                     }
-                    if (showBottomSheet) {
-                        ModalBottomSheet(
-                            onDismissRequest = { showBottomSheet = false }
-                        ) {
-                            if (datePickerState.selectedStartDateMillis != null) {
-                                val fromInstant =
-                                    Instant.fromEpochMilliseconds(datePickerState.selectedStartDateMillis!!)
-                                val fromDateTime =
-                                    fromInstant.toLocalDateTime(TimeZone.currentSystemDefault())
-                                val from = LocalDate(
-                                    fromDateTime.year,
-                                    fromDateTime.monthNumber,
-                                    fromDateTime.dayOfMonth
-                                )
-                                Text(text = "From $from")
-                            } else {
-                                Text(text = "Start date not selected")
-                            }
-
-                            if (datePickerState.selectedEndDateMillis != null) {
-                                val toInstant =
-                                    Instant.fromEpochMilliseconds(datePickerState.selectedEndDateMillis!!)
-                                val toDateTime =
-                                    toInstant.toLocalDateTime(TimeZone.currentSystemDefault())
-                                val to = LocalDate(
-                                    toDateTime.year,
-                                    toDateTime.monthNumber,
-                                    toDateTime.dayOfMonth
-                                )
-
-                                Text(text = "To $to")
-                            } else {
-                                Text(text = "End date not selected")
-                            }
-                        }
+                    if (detailedPropertyUiState.showBottomSheet) {
+                        DateSelectionBottomSheet()
                     }
-                }
-
-                else -> {
-                    //Keep it empty
                 }
             }
         },
@@ -288,16 +192,5 @@ fun MainScreen(
                 navController = navController,
             )
         }
-    )
-}
-
-@Composable
-fun BottomBarItemText(
-    text: String,
-    textColor: Color = MaterialTheme.colorScheme.onPrimaryContainer
-) {
-    Text(
-        text = text,
-        color = textColor
     )
 }
