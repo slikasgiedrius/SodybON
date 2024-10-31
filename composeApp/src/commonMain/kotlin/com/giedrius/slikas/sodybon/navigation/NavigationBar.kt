@@ -47,20 +47,20 @@ private val BOTTOM_NAV_ICON_SIZE = 30.dp
 private const val HOME_ICON_CROSSFADE_DURATION = 300
 internal val CUSTOM_BOTTOM_BAR_HEIGHT = 100.dp //Increased for an experiment
 
-enum class BottomBarTabs {
+enum class NavigationBarTabs {
     Home,
     Profile,
 }
 
 @Composable
-fun MainScreen(
+fun NavigationBar(
     loginViewModel: LoginViewModel = koinInject(),
     detailedPropertyViewModel: DetailedPropertyViewModel = koinInject(),
 ) {
     val loginUiState by loginViewModel.uiState.collectAsState()
 
     val navController = rememberNavController()
-    var selectedScreen by remember { mutableStateOf(BottomBarTabs.Home) }
+    var selectedScreen by remember { mutableStateOf(NavigationBarTabs.Home) }
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -68,7 +68,7 @@ fun MainScreen(
     Scaffold(
         bottomBar = {
             when (currentRoute) {
-                BottomBarTabs.Home.name, BottomBarTabs.Profile.name -> {
+                NavigationBarTabs.Home.name, NavigationBarTabs.Profile.name -> {
                     BottomAppBar(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
                         modifier = Modifier.height(CUSTOM_BOTTOM_BAR_HEIGHT)
@@ -77,20 +77,20 @@ fun MainScreen(
                         NavigationBarItem(
                             icon = {
                                 Crossfade(
-                                    targetState = selectedScreen == BottomBarTabs.Home,
+                                    targetState = selectedScreen == NavigationBarTabs.Home,
                                     animationSpec = tween(durationMillis = HOME_ICON_CROSSFADE_DURATION)
                                 ) { isHomeSelected ->
                                     if (isHomeSelected) {
                                         Icon(
                                             modifier = Modifier.size(BOTTOM_NAV_ICON_SIZE),
                                             imageVector = vectorResource(Res.drawable.door_filled),
-                                            contentDescription = BottomBarTabs.Home.name,
+                                            contentDescription = NavigationBarTabs.Home.name,
                                         )
                                     } else {
                                         Icon(
                                             modifier = Modifier.size(BOTTOM_NAV_ICON_SIZE),
                                             imageVector = vectorResource(Res.drawable.door),
-                                            contentDescription = BottomBarTabs.Home.name,
+                                            contentDescription = NavigationBarTabs.Home.name,
                                             tint = MaterialTheme.colorScheme.onPrimaryContainer
                                         )
                                     }
@@ -98,16 +98,16 @@ fun MainScreen(
                             },
                             label = {
                                 BottomBarItemText(
-                                    text = BottomBarTabs.Home.name
+                                    text = NavigationBarTabs.Home.name
                                 )
                             },
-                            selected = BottomBarTabs.Home == selectedScreen,
+                            selected = NavigationBarTabs.Home == selectedScreen,
                             onClick = {
-                                Logger.logBottomNavigationItemClicked(BottomBarTabs.Home.name)
-                                selectedScreen = BottomBarTabs.Home
+                                Logger.logBottomNavigationItemClicked(NavigationBarTabs.Home.name)
+                                selectedScreen = NavigationBarTabs.Home
                                 navigateToTab(
                                     navController = navController,
-                                    tab = BottomBarTabs.Home
+                                    tab = NavigationBarTabs.Home
                                 )
                             },
                         )
@@ -137,23 +137,23 @@ fun MainScreen(
                                         modifier = Modifier.size(BOTTOM_NAV_ICON_SIZE),
                                         imageVector = Icons.Default.AccountCircle,
                                         contentDescription = loginUiState.currentProfile?.firstName
-                                            ?: BottomBarTabs.Profile.name,
+                                            ?: NavigationBarTabs.Profile.name,
                                     )
                                 }
                             },
                             label = {
                                 BottomBarItemText(
                                     text = loginUiState.currentProfile?.firstName
-                                        ?: BottomBarTabs.Profile.name
+                                        ?: NavigationBarTabs.Profile.name
                                 )
                             },
-                            selected = BottomBarTabs.Profile == selectedScreen,
+                            selected = NavigationBarTabs.Profile == selectedScreen,
                             onClick = {
-                                Logger.logBottomNavigationItemClicked(BottomBarTabs.Profile.name)
-                                selectedScreen = BottomBarTabs.Profile
+                                Logger.logBottomNavigationItemClicked(NavigationBarTabs.Profile.name)
+                                selectedScreen = NavigationBarTabs.Profile
                                 navigateToTab(
                                     navController = navController,
-                                    tab = BottomBarTabs.Profile
+                                    tab = NavigationBarTabs.Profile
                                 )
                             },
                         )

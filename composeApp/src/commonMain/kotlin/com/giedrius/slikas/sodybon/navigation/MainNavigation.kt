@@ -10,14 +10,11 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.giedrius.slikas.sodybon.navigation.MainNavigationDirections.Actions.navigateBack
 import com.giedrius.slikas.sodybon.navigation.MainNavigationDirections.Actions.openDetailedProperty
-import com.giedrius.slikas.sodybon.navigation.Navigations.MAIN
 import com.giedrius.slikas.sodybon.screens.feature.detailed_property.DetailedArticleScreen
 import com.giedrius.slikas.sodybon.screens.feature.home.HomeScreen
 import com.giedrius.slikas.sodybon.screens.feature.profile.ProfileScreen
 
-internal object Navigations {
-    const val MAIN = "Main"
-}
+const val MAIN = "Main"
 
 @Composable
 fun MainNavigation(

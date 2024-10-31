@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
 import com.giedrius.slikas.sodybon.compose.components.GoogleLogin
 import com.giedrius.slikas.sodybon.data.profile.model.Profile
-import com.giedrius.slikas.sodybon.navigation.BottomBarTabs
+import com.giedrius.slikas.sodybon.navigation.NavigationBarTabs
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.koin.compose.koinInject
@@ -96,7 +96,7 @@ fun LoginScreenContent(
                             Icon(
                                 Icons.Default.AccountCircle,
                                 contentDescription = currentProfile.firstName
-                                    ?: BottomBarTabs.Profile.name,
+                                    ?: NavigationBarTabs.Profile.name,
                             )
                         }
                         Text(

@@ -15,7 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.giedrius.slikas.sodybon.data.profile.model.Profile
-import com.giedrius.slikas.sodybon.navigation.BottomBarTabs
+import com.giedrius.slikas.sodybon.navigation.NavigationBarTabs
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 
@@ -44,7 +44,7 @@ fun ProfilePicture(
         Icon(
             modifier = Modifier.size(PROFILE_PICTURE_SIZE),
             imageVector = Icons.Default.AccountCircle,
-            contentDescription = currentProfile?.firstName ?: BottomBarTabs.Profile.name,
+            contentDescription = currentProfile?.firstName ?: NavigationBarTabs.Profile.name,
         )
     }
 }

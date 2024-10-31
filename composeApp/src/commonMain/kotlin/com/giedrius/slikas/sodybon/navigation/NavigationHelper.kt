@@ -4,7 +4,7 @@ import androidx.navigation.NavHostController
 
 fun navigateToTab(
     navController: NavHostController,
-    tab: BottomBarTabs
+    tab: NavigationBarTabs
 ) {
     navController.navigate(
         route = tab.name
