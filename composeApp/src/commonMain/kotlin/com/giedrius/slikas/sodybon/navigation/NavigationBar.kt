@@ -4,7 +4,6 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -31,7 +30,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.components.BottomBarItemText
-import com.giedrius.slikas.sodybon.compose.components.ReserveButton
 import com.giedrius.slikas.sodybon.screens.feature.detailed_property.DetailedPropertyViewModel
 import com.giedrius.slikas.sodybon.screens.feature.login.LoginViewModel
 import com.giedrius.slikas.sodybon.utils.Navigation.logBottomNavigationItemClicked
@@ -160,22 +158,13 @@ fun NavigationBar(
                     }
                 }
 
-                MainNavigationDirections.Routes.DETAILED_PROPERTY -> {
-                    val propertyName: String? = navBackStackEntry?.arguments?.getString(
-                        MainNavigationDirections.DetailedPropertyArgs.PROPERTY_ID
-                    )
-                    ReserveButton(
-                        propertyName = propertyName,
-                        onReserveButtonClicked = {
-                            detailedPropertyViewModel.setShowDatePicker(true)
-                        }
-                    )
+                else -> {
+                    //Do not add Navigation Bar to other screens
                 }
             }
         },
         content = { innerPadding ->
             MainNavigation(
-                modifier = Modifier.padding(bottom = innerPadding.calculateBottomPadding()),
                 navController = navController,
             )
         }

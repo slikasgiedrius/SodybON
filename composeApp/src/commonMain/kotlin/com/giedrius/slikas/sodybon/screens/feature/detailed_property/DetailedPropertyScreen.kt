@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -11,7 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import co.touchlab.kermit.Logger
-import com.giedrius.slikas.sodybon.compose.base.SodybOnTheme
+import com.giedrius.slikas.sodybon.compose.components.ReserveButton
 import com.giedrius.slikas.sodybon.screens.feature.detailed_property.date_selection.DatePicker
 import com.giedrius.slikas.sodybon.screens.feature.detailed_property.date_selection.DateSelectionBottomSheet
 import com.giedrius.slikas.sodybon.utils.Property.logClickBackFromDetailedPropertyScreen
@@ -19,7 +20,7 @@ import com.giedrius.slikas.sodybon.utils.extensions.topLevelFullScreenBackground
 import org.koin.compose.koinInject
 
 @Composable
-fun DetailedArticleScreen(
+fun DetailedPropertyScreen(
     modifier: Modifier = Modifier,
     propertyId: String?,
     detailedPropertyViewModel: DetailedPropertyViewModel = koinInject(),
@@ -34,10 +35,21 @@ fun DetailedArticleScreen(
         DateSelectionBottomSheet()
     }
 
-    SodybOnTheme {
+    Scaffold(
+        bottomBar = {
+            if (!propertyId.isNullOrEmpty()) {
+                Text(propertyId)
+            }
+            ReserveButton(
+                propertyName = propertyId, //change to propertyName
+                onReserveButtonClicked = {
+                    detailedPropertyViewModel.setShowDatePicker(true)
+                }
+            )
+        }
+    ) {
         Column(
-            modifier = modifier
-                .topLevelFullScreenBackground(MaterialTheme.colorScheme.error),
+            modifier = modifier.topLevelFullScreenBackground(MaterialTheme.colorScheme.error),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -53,4 +65,6 @@ fun DetailedArticleScreen(
             }
         }
     }
+
+
 }

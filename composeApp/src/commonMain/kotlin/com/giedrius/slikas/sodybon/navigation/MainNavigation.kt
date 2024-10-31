@@ -1,7 +1,9 @@
 package com.giedrius.slikas.sodybon.navigation
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -10,7 +12,7 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.giedrius.slikas.sodybon.navigation.MainNavigationDirections.Actions.navigateBack
 import com.giedrius.slikas.sodybon.navigation.MainNavigationDirections.Actions.openDetailedProperty
-import com.giedrius.slikas.sodybon.screens.feature.detailed_property.DetailedArticleScreen
+import com.giedrius.slikas.sodybon.screens.feature.detailed_property.DetailedPropertyScreen
 import com.giedrius.slikas.sodybon.screens.feature.home.HomeScreen
 import com.giedrius.slikas.sodybon.screens.feature.profile.ProfileScreen
 
@@ -24,13 +26,13 @@ fun MainNavigation(
     NavHost(
         navController = navController,
         startDestination = MAIN,
-        modifier = modifier,
     ) {
         navigation(startDestination = MainNavigationDirections.Routes.HOME, route = MAIN) {
             composable(
                 route = MainNavigationDirections.Routes.HOME
             ) {
                 HomeScreen(
+                    modifier = Modifier.padding(bottom = CUSTOM_BOTTOM_BAR_HEIGHT),
                     onPropertyClicked = {
                         navController.openDetailedProperty(propertyId = it)
                     }
@@ -45,7 +47,7 @@ fun MainNavigation(
                     }
                 )
             ) {
-                DetailedArticleScreen(
+                DetailedPropertyScreen(
                     propertyId = it.arguments?.getString(MainNavigationDirections.DetailedPropertyArgs.PROPERTY_ID),
                     onNavigateBack = {
                         navController.navigateBack()
@@ -53,7 +55,9 @@ fun MainNavigation(
                 )
             }
             composable(MainNavigationDirections.Routes.PROFILE) {
-                ProfileScreen()
+                ProfileScreen(
+                    modifier = Modifier.padding(bottom = CUSTOM_BOTTOM_BAR_HEIGHT),
+                )
             }
         }
     }
