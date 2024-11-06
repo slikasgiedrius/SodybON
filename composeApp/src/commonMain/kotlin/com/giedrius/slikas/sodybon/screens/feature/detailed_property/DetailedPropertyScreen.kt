@@ -7,12 +7,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.compose.components.ReserveButton
+import com.giedrius.slikas.sodybon.data.property.model.Property
 import com.giedrius.slikas.sodybon.screens.feature.detailed_property.date_selection.DatePicker
 import com.giedrius.slikas.sodybon.screens.feature.detailed_property.date_selection.DateSelectionBottomSheet
 import com.giedrius.slikas.sodybon.utils.Property.logClickBackFromDetailedPropertyScreen
@@ -28,6 +30,12 @@ fun DetailedPropertyScreen(
 ) {
     val uiState by detailedPropertyViewModel.uiState.collectAsState()
 
+    LaunchedEffect(key1 = Unit) {
+        if (!propertyId.isNullOrEmpty()) {
+            detailedPropertyViewModel.getProperty(propertyId = propertyId)
+        }
+    }
+
     if (uiState.showDatePicker) {
         DatePicker()
     }
@@ -35,36 +43,44 @@ fun DetailedPropertyScreen(
         DateSelectionBottomSheet()
     }
 
-    Scaffold(
-        bottomBar = {
-            if (!propertyId.isNullOrEmpty()) {
-                Text(propertyId)
-            }
-            ReserveButton(
-                propertyName = propertyId, //change to propertyName
-                onReserveButtonClicked = {
-                    detailedPropertyViewModel.setShowDatePicker(true)
-                }
-            )
-        }
-    ) {
-        Column(
-            modifier = modifier.topLevelFullScreenBackground(MaterialTheme.colorScheme.error),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Button(onClick = {
-                Logger.logClickBackFromDetailedPropertyScreen()
-                onNavigateBack()
-            }) {
-                Text("Go back")
-            }
+    Scaffold(bottomBar = {
+        ReserveButton(propertyName = propertyId, //change to propertyName
+            onReserveButtonClicked = {
+                detailedPropertyViewModel.setShowDatePicker(true)
+            })
+    }) {
 
-            if (!propertyId.isNullOrEmpty()) {
-                Text(propertyId)
-            }
+        if (uiState.propertyDetails != null) {
+            DetailedPropertyScreenContent(
+                property = uiState.propertyDetails!!,
+                onNavigateBack = onNavigateBack,
+                modifier = modifier
+            )
+        } else {
+            //Handle if property is null
         }
     }
+}
 
+@Composable
+private fun DetailedPropertyScreenContent(
+    property: Property,
+    onNavigateBack: () -> Unit,
+    modifier: Modifier = Modifier,
 
+    ) {
+    Column(
+        modifier = modifier.topLevelFullScreenBackground(MaterialTheme.colorScheme.error),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(onClick = {
+            Logger.logClickBackFromDetailedPropertyScreen()
+            onNavigateBack()
+        }) {
+            Text("Go back")
+        }
+
+        Text(property.name)
+    }
 }

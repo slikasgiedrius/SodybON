@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.data.property.PropertyRepository
-import com.giedrius.slikas.sodybon.data.property.model.GetPropertiesResult
+import com.giedrius.slikas.sodybon.data.property.model.GetPropertyListResult
 import com.giedrius.slikas.sodybon.data.property.model.Property
 import com.giedrius.slikas.sodybon.utils.Property.logFailedRetrievalOfProperties
 import com.giedrius.slikas.sodybon.utils.Property.logSuccessfulRetrievalOfProperties
@@ -44,8 +44,8 @@ class HomeViewModel(
                 )
             }
 
-            when (val result = propertyRepository.getProperties()) {
-                is GetPropertiesResult.Success -> {
+            when (val result = propertyRepository.getPropertyList()) {
+                is GetPropertyListResult.Success -> {
                     _uiState.update { currentState ->
                         Logger.logSuccessfulRetrievalOfProperties()
                         currentState.copy(
@@ -55,7 +55,7 @@ class HomeViewModel(
                     }
                 }
 
-                is GetPropertiesResult.Error -> {
+                is GetPropertyListResult.Error -> {
                     _uiState.update { currentState ->
                         Logger.logFailedRetrievalOfProperties(exception = result.exception)
                         currentState.copy(

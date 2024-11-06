@@ -17,7 +17,9 @@ fun mainModule() = module {
     }
 
     single {
-        DetailedPropertyViewModel()
+        DetailedPropertyViewModel(
+            propertyRepository = get(),
+        )
     }
 
     single {
