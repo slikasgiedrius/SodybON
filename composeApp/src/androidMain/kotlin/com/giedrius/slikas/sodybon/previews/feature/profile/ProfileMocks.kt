@@ -1,4 +1,4 @@
-package com.giedrius.slikas.sodybon.previews.profile
+package com.giedrius.slikas.sodybon.previews.feature.profile
 
 import com.giedrius.slikas.sodybon.data.profile.model.Profile
 

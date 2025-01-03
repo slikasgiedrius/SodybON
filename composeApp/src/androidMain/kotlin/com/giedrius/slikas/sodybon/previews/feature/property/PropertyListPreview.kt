@@ -1,4 +1,4 @@
-package com.giedrius.slikas.sodybon.previews.property
+package com.giedrius.slikas.sodybon.previews.feature.property
 
 import android.content.res.Configuration
 import androidx.compose.runtime.Composable

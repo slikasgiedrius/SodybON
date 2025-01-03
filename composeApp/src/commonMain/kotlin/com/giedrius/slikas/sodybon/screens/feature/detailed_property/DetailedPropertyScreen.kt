@@ -79,7 +79,7 @@ fun DetailedPropertyScreen(
 }
 
 @Composable
-private fun DetailedPropertyScreenContent(
+fun DetailedPropertyScreenContent(
     property: Property,
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
