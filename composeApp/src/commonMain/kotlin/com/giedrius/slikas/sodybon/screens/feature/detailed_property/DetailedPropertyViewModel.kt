@@ -4,11 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
 import com.giedrius.slikas.sodybon.data.property.PropertyRepository
-import com.giedrius.slikas.sodybon.data.property.model.GetPropertyListResult
 import com.giedrius.slikas.sodybon.data.property.model.GetPropertyResult
 import com.giedrius.slikas.sodybon.data.property.model.Property
-import com.giedrius.slikas.sodybon.utils.Property.logFailedRetrievalOfProperties
-import com.giedrius.slikas.sodybon.utils.Property.logSuccessfulRetrievalOfProperties
+import com.giedrius.slikas.sodybon.utils.Property.logFailedRetrievalOfDetailedProperty
+import com.giedrius.slikas.sodybon.utils.Property.logSuccessfulRetrievalOfProperty
 import dev.gitlive.firebase.firestore.FirestoreExceptionCode
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -45,7 +44,7 @@ class DetailedPropertyViewModel(
             when (val result = propertyRepository.getProperty(propertyId = propertyId)) {
                 is GetPropertyResult.Success -> {
                     _uiState.update { currentState ->
-                        Logger.logSuccessfulRetrievalOfProperties()
+                        Logger.logSuccessfulRetrievalOfProperty(result.property.name)
                         currentState.copy(
                             isPropertyDetailsLoading = false,
                             propertyDetails = result.property
@@ -55,7 +54,7 @@ class DetailedPropertyViewModel(
 
                 is GetPropertyResult.Error -> {
                     _uiState.update { currentState ->
-                        Logger.logFailedRetrievalOfProperties(exception = result.exception)
+                        Logger.logFailedRetrievalOfDetailedProperty(exception = result.exception)
                         currentState.copy(
                             isPropertyDetailsLoading = false,
                             getPropertyDetailsException = result.exception

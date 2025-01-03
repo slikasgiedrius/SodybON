@@ -1,9 +1,11 @@
 package com.giedrius.slikas.sodybon.navigation
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -26,6 +28,12 @@ fun MainNavigation(
     NavHost(
         navController = navController,
         startDestination = MAIN,
+        enterTransition = {
+            fadeIn(animationSpec = tween(durationMillis = 700))
+        },
+        exitTransition = {
+            fadeOut(animationSpec = tween(200))
+        }
     ) {
         navigation(startDestination = MainNavigationDirections.Routes.HOME, route = MAIN) {
             composable(
@@ -35,7 +43,7 @@ fun MainNavigation(
                     modifier = Modifier.padding(bottom = CUSTOM_BOTTOM_BAR_HEIGHT),
                     onPropertyClicked = {
                         navController.openDetailedProperty(propertyId = it)
-                    }
+                    },
                 )
             }
 

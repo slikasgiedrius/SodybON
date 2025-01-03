@@ -28,8 +28,16 @@ object Property {
         Logger.i { "List of properties retrieved successfully" }
     }
 
+    fun Logger.logSuccessfulRetrievalOfProperty(propertyName: String) {
+        Logger.i { "Detailed property $propertyName data retrieved successfully" }
+    }
+
     fun Logger.logFailedRetrievalOfProperties(exception: FirestoreExceptionCode) {
         Logger.e("List of properties retrieval failed with exception: ${exception.name}")
+    }
+
+    fun Logger.logFailedRetrievalOfDetailedProperty(exception: FirestoreExceptionCode) {
+        Logger.e("Detailed property data retrieval failed with exception: ${exception.name}")
     }
 
     fun Logger.logListItemClicked(propertyName: String) {
